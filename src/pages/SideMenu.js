@@ -8,7 +8,7 @@ function SideMenu({children}) {
 
   return (
     <div>
-        <Sidebar.Pushable as={Segment}>
+        <Sidebar.Pushable style={{transform : 'none'}} as={Segment}>
             <Sidebar
             as={Menu}
             icon='labeled'
@@ -48,7 +48,7 @@ function SideMenu({children}) {
                 
             </Sidebar>
 
-            <Sidebar.Pusher style={{height: '100vh'}}>
+            <Sidebar.Pusher>
                 <Header size='small' as={Segment} inverted >
                     <Container fluid onClick={() => setVisible((prevState) => !prevState )}>
 

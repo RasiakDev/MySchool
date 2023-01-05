@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
-import { Menu, Icon, Table, Container, Button } from 'semantic-ui-react'
+import { Menu, Icon, Table, Container, Button, Segment } from 'semantic-ui-react'
 import _ from 'lodash'
-import { StudentContext } from '../context/StudentContext'
+import {colors} from '../config/colors'
 
 //---------------TABLE FILTER-------------------------//
 function filterReducer(state, action) {    
@@ -24,16 +24,23 @@ function filterReducer(state, action) {
       throw new Error()
   }
 }
-export default function Students({studentsList}) {
+export default function Students({studentsList, schoolSemester, allStudents}) {
   const [state, dispatch] = React.useReducer(filterReducer, {
     column: null,
     data: studentsList,
     direction: null,
   })
   const { column, data, direction } = state
-        
+
   return (
     <Container >
+        {/* Displays the years segment on top of the table if allStudents is true */}
+        {!allStudents &&(<Segment style={{backgroundColor: colors.primary, marginTop: 20}} color="teal" textAlign='center'>
+            <h2>{schoolSemester}</h2>
+            <Icon  size="large" name='dropdown'/>
+        </Segment>)
+        }
+
       <Table selectable sortable fixed celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
@@ -95,7 +102,7 @@ export default function Students({studentsList}) {
               <Table.Cell textAlign='center'><p>{course}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{level}</p></Table.Cell>
               <Table.Cell ><p>{assignedClass}</p></Table.Cell>
-              <Table.Cell textAlign='center'><Icon onClick={() => console.log("click")} name='edit'/></Table.Cell>
+              <Table.Cell onClick={() => console.log("click")} textAlign='center'><Icon  name='edit'/></Table.Cell>
           </Table.Row>
         ))}
         </Table.Body>        
