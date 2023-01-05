@@ -24,34 +24,34 @@ const lista = [
     {
         "id": 3,
         'name': 'Gezim',
-        'lastname': 'Guma',
+        'lastname': 'Hovi',
         'age': 28,
-        'course': 'English',
+        'course': 'Italian',
         'level': 'A2',
         'assignedClass': 'Anglisht B1 Brisejda'
     },       
   ]
 
-  function filterReducer(state, action) {
-    switch (action.type) {
-      case 'CHANGE_SORT':
-        if (state.column === action.column) {
-          return {
-            ...state,
-            data: state.data.slice().reverse(),
-            direction:
-              state.direction === 'ascending' ? 'descending' : 'ascending',
-          }
-        }  
+function filterReducer(state, action) {
+  switch (action.type) {
+    case 'CHANGE_SORT':
+      if (state.column === action.column) {
         return {
-          column: action.column,
-          data: _.sortBy(state.data, [action.column]),
-          direction: 'ascending',
+          ...state,
+          data: state.data.slice().reverse(),
+          direction:
+            state.direction === 'ascending' ? 'descending' : 'ascending',
         }
-      default:
-        throw new Error()
-    }
+      }  
+      return {
+        column: action.column,
+        data: _.sortBy(state.data, [action.column]),
+        direction: 'ascending',
+      }
+    default:
+      throw new Error()
   }
+}
 export default function Students() {
   const [state, dispatch] = React.useReducer(filterReducer, {
     column: null,
@@ -79,21 +79,35 @@ export default function Students() {
           >
               <h4>Age</h4>
           </Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'><h4>Course</h4></Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'><h4>Level</h4></Table.HeaderCell>          
-          <Table.HeaderCell><h4>Classroom</h4></Table.HeaderCell>          
+          <Table.HeaderCell 
+            sorted={column === 'age' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}
+            textAlign='center'>
+              <h4>Course</h4>
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'age' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}
+            textAlign='center'>
+              <h4>Level</h4>
+          </Table.HeaderCell>          
+          <Table.HeaderCell
+            sorted={column === 'age' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}>
+            <h4>Classroom</h4>
+          </Table.HeaderCell>          
           <Table.HeaderCell textAlign='center'><h4>Edit</h4></Table.HeaderCell>          
         </Table.Row>
         </Table.Header>
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
-        {lista.map((item) => (
-          <Table.Row key={item.id}>
-              <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{item.age}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{item.course}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{item.level}</p></Table.Cell>
-              <Table.Cell ><p>{item.assignedClass}</p></Table.Cell>
+        {data.map(({id, name, lastname, age, course, level, assignedClass}) => (
+          <Table.Row key={id}>
+              <Table.Cell><p>{name} {lastname}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{age}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{course}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{level}</p></Table.Cell>
+              <Table.Cell ><p>{assignedClass}</p></Table.Cell>
               <Table.Cell textAlign='center'><Icon onClick={() => console.log("click")} name='edit'/></Table.Cell>
           </Table.Row>
         ))}
