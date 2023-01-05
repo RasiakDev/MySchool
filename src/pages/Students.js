@@ -63,10 +63,16 @@ export default function Students() {
       
   return (
     <Container >
-      <Table  sortable fixed celled>
+      <Table selectable sortable fixed celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
         <Table.Row>
+          <Table.HeaderCell
+            width={2}
+            sorted={column === 'id' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'id' })}          >
+            <h4>Nr. Amze</h4>
+          </Table.HeaderCell>
           <Table.HeaderCell
             sorted={column === 'name' ? direction : null}
             onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}          >
@@ -80,20 +86,20 @@ export default function Students() {
               <h4>Age</h4>
           </Table.HeaderCell>
           <Table.HeaderCell 
-            sorted={column === 'age' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}
+            sorted={column === 'course' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'course' })}
             textAlign='center'>
               <h4>Course</h4>
           </Table.HeaderCell>
           <Table.HeaderCell
-            sorted={column === 'age' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}
+            sorted={column === 'level' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'level' })}
             textAlign='center'>
               <h4>Level</h4>
           </Table.HeaderCell>          
           <Table.HeaderCell
-            sorted={column === 'age' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}>
+            sorted={column === 'classroom' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'classroom' })}>
             <h4>Classroom</h4>
           </Table.HeaderCell>          
           <Table.HeaderCell textAlign='center'><h4>Edit</h4></Table.HeaderCell>          
@@ -103,6 +109,7 @@ export default function Students() {
         <Table.Body>
         {data.map(({id, name, lastname, age, course, level, assignedClass}) => (
           <Table.Row key={id}>
+              <Table.Cell><p>{id}</p></Table.Cell>
               <Table.Cell><p>{name} {lastname}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{age}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{course}</p></Table.Cell>
@@ -115,7 +122,7 @@ export default function Students() {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan='6'>            
+            <Table.HeaderCell colSpan='7'>            
               <Menu floated='left' pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />
