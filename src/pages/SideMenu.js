@@ -8,7 +8,7 @@ function SideMenu({children}) {
 
   return (
     <div>
-        <Sidebar.Pushable style={{transform : 'none'}} as={Segment}>
+        <Sidebar.Pushable  as={Segment}>
             <Sidebar
             as={Menu}
             icon='labeled'
