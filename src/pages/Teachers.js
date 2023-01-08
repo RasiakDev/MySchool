@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Teachers() {
   return (
-    <div>Teachers</div>
+    <div style={{backgroundColor: 'red', height: '100%'}}>Teachers</div>
   )
 }

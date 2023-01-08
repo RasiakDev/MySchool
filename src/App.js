@@ -3,13 +3,15 @@ import Dashboard from './pages/Dashboard'
 import Students from './pages/Students';
 import Teachers from './pages/Teachers'
 import Schedules from './pages/Schedules';
-import NoPage from "./pages/NoPage";
 import SideMenu from "./pages/SideMenu";
-import { Sidebar } from "semantic-ui-react";
 import { StudentProvider } from "./context/StudentContext";
+import { ScheduleProvider } from "./context/ScheduleContext";
 function App() {
   return (
+    
+
     <StudentProvider>
+    <ScheduleProvider>
       <BrowserRouter>
         <SideMenu>
           <Routes>
@@ -20,7 +22,9 @@ function App() {
           </Routes>
         </SideMenu>
       </BrowserRouter>
+    </ScheduleProvider>
     </StudentProvider>
+    
       
   
     

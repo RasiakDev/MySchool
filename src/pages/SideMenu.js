@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { Icon, Header, Sidebar, Menu, Segment, Container } from 'semantic-ui-react'
-
+import '../css/SideMenu.css'
 function SideMenu({children}) {
 
     const [visible, setVisible] = useState(true)
 
   return (
-    <div>
+    
         <Sidebar.Pushable style={{transform : 'none'}} as={Segment}>
             <Sidebar
+            className='sidebar'
             as={Menu}
             icon='labeled'
             inverted
@@ -60,8 +61,7 @@ function SideMenu({children}) {
             </Segment>
             </Sidebar.Pusher>
         </Sidebar.Pushable>
-        
-    </div>
+    
   )
 }
 
