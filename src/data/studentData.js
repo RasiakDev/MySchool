@@ -62,6 +62,150 @@ export const studentsList = [
         'level': 'B2',
         'assignedClass': 'Anglisht B1 Brisejda'
     },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda'
+    },       
   ]
 
 export const semesters = 

@@ -1,4 +1,6 @@
-export const colors = {
+const colors = {
     primary : 'teal',
-    secondary : 'blue'
+    secondary : 'darkCyan'
 }
+
+export default colors

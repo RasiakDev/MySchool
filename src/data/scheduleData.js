@@ -23,4 +23,20 @@ export const monday = [
         name: 'B2 Adult',
         teacher: 'Indrit'
     },
+    {
+        id: 5,
+        class: 'German',
+        startingHour: 18,
+        endingHour: 20,
+        name: 'B2 Adult',
+        teacher: 'Indrit'
+    },
+    {
+        id: 4,
+        class: 'German',
+        startingHour: 18,
+        endingHour: 20,
+        name: 'B2 Adult',
+        teacher: 'Indrit'
+    },
 ]
