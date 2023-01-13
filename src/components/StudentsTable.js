@@ -2,6 +2,7 @@ import React,{useContext} from 'react'
 import { Menu, Icon, Table, Container, Button, Segment } from 'semantic-ui-react'
 import _ from 'lodash'
 import {colors} from '../config/colors'
+import './css/Students.css'
 
 //---------------TABLE FILTER-------------------------//
 function filterReducer(state, action) {    
@@ -24,6 +25,17 @@ function filterReducer(state, action) {
       throw new Error()
   }
 }
+
+//Table header style
+const tableHeader = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'teal',
+  borderRadius: 3,
+  verticalAlign: 'center'
+  
+}
 export default function Students({studentsList, schoolSemester, allStudents}) {
   const [state, dispatch] = React.useReducer(filterReducer, {
     column: null,
@@ -35,11 +47,12 @@ export default function Students({studentsList, schoolSemester, allStudents}) {
   return (
     <Container >
         {/* Displays the years segment on top of the table if allStudents is true */}
-        {!allStudents &&(<Segment style={{backgroundColor: colors.primary, marginTop: 20}} color="teal" textAlign='center'>
-            <h2>{schoolSemester}</h2>
-            <Icon  size="large" name='dropdown'/>
-        </Segment>)
-        }
+        {!allStudents &&(
+          <div style={tableHeader} >
+              <h2>{schoolSemester}</h2>
+              <Icon size="large" name='dropdown'/>
+          </div>
+        )}
 
       <Table selectable sortable fixed celled>
         {/* -----------------TABLE HEADER------------------------ */}
