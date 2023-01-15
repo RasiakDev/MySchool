@@ -1,5 +1,5 @@
-import React,{useContext} from 'react'
-import { Menu, Icon, Table, Container, Button, Segment } from 'semantic-ui-react'
+import React,{useState} from 'react'
+import { Menu, Icon, Table, Button } from 'semantic-ui-react'
 import _ from 'lodash'
 import {colors} from '../config/colors'
 import '../css/Students.css'
@@ -36,7 +36,7 @@ const tableHeader = {
   verticalAlign: 'center'
   
 }
-export default function Students({studentsList, schoolSemester, allStudents}) {
+export default function Students({studentsList, schoolSemester}) {
   const [state, dispatch] = React.useReducer(filterReducer, {
     column: null,
     data: studentsList,
@@ -45,14 +45,6 @@ export default function Students({studentsList, schoolSemester, allStudents}) {
   const { column, data, direction } = state
 
   return (  
-        // {/* Displays the years segment on top of the table if allStudents is true */}
-        // {!allStudents &&(
-        //   <div style={tableHeader} >
-        //       <h2>{schoolSemester}</h2>
-        //       <Icon size="large" name='dropdown'/>
-        //   </div>
-        // )}
-
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
-import { Icon, Header, Sidebar, Menu, Segment, Container, Sticky } from 'semantic-ui-react'
+import { Icon, Sidebar, Menu, Container } from 'semantic-ui-react'
 import '../css/SideMenu.css'
 import colors from '../config/colors'
 function SideMenu({children}) {
@@ -8,7 +8,7 @@ function SideMenu({children}) {
     const [visible, setVisible] = useState(true)
 
   return (
-        <Sidebar.Pushable>
+        <Sidebar.Pushable className="container">
             <Sidebar
             className='sidebar'
             as={Menu}
@@ -23,7 +23,7 @@ function SideMenu({children}) {
                     <Icon 
                         style={{float: 'right'}}
                         name='list'
-                        color='white'
+                        color='black'
                         size='large'
                         onClick={() => setVisible((prevState) => !prevState )}
                     />
@@ -36,7 +36,7 @@ function SideMenu({children}) {
                 </Link>
                 <Link to={'schedules'}>
                     <Menu.Item>
-                        <Icon name='calendar check'/>
+                        <Icon name='clock'/>
                         Schedules
                     </Menu.Item>
                 </Link>
@@ -50,6 +50,12 @@ function SideMenu({children}) {
                     <Menu.Item>
                         <Icon name='user'/>
                         Teachers
+                    </Menu.Item>
+                </Link>
+                <Link to={'academic-years'}>
+                    <Menu.Item>
+                        <Icon name='calendar alternate'/>
+                        Academic Years
                     </Menu.Item>
                 </Link>
                 
@@ -67,12 +73,12 @@ function SideMenu({children}) {
                     <Icon 
                         style={{float: 'left'}}
                         name='list'
-                        color='white'
+                        color='black'
                         size='large'
                         onClick={() => setVisible((prevState) => !prevState )}
                     />
                 )}
-                <Container className="container">
+                <Container className="childContainer">
                     {children}
                 </Container>
             

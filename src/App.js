@@ -6,6 +6,7 @@ import Schedules from './pages/Schedules';
 import SideMenu from "./pages/SideMenu";
 import { StudentProvider } from "./context/StudentContext";
 import { ScheduleProvider } from "./context/ScheduleContext";
+import AcademicYears from "./pages/AcademicYears";
 function App() {
   return (
     
@@ -19,6 +20,7 @@ function App() {
               <Route path='teachers' element={<Teachers/>}/>
               <Route path='students' element={<Students/>}/>
               <Route path='schedules' element={<Schedules/>}/>
+              <Route path='academic-years' element={<AcademicYears/>}/>
           </Routes>
         </SideMenu>
       </BrowserRouter>

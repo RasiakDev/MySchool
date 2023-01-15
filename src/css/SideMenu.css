@@ -1,6 +1,13 @@
 .container {
-  margin: 50px 10px 50px 20px;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+
+.childContainer {
   overflow: scroll;
   height: 100vh;
-  width: 100%;
+  width: 2000px;
+  margin-top: 40px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
 }

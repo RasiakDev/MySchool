@@ -62,156 +62,14 @@ export const studentsList = [
         'level': 'B2',
         'assignedClass': 'Anglisht B1 Brisejda'
     },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
-    {
-        "id": 7,
-        'name': 'Kristi',
-        'lastname': 'Bishqemi',
-        'age': 38,
-        'course': 'Italian',
-        'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
-    },       
   ]
 
 export const semesters = 
 [
     {
         year : '2022 - 2023',
+        studentCount: 2,
+        classromCount: 4,
         students : [
             {
                 "id": 3,
@@ -234,7 +92,34 @@ export const semesters =
         ]
     },
     {
-        year : 'Sumer 2022',
+        year : 'Summer 2022',
+        studentCount: 2,
+        classromCount: 3,
+        students : [
+            {
+                "id": 7,
+                'name': 'Kristi',
+                'lastname': 'Bishqemi',
+                'age': 38,
+                'course': 'Italian',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B1 Brisejda'
+            },       
+            {
+                "id": 6,
+                'name': 'Paola',
+                'lastname': 'Biturku',
+                'age': 20,
+                'course': 'German',
+                'level': 'A1',
+                'assignedClass': 'Anglisht B1 Brisejda'
+            },
+        ]
+    },
+    {
+        year : '2021 - 2022',
+        studentCount: 2,
+        classromCount: 3,
         students : [
             {
                 "id": 7,
