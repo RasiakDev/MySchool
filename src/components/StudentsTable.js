@@ -1,10 +1,30 @@
-import React,{useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Menu, Icon, Table, Button } from 'semantic-ui-react'
 import _ from 'lodash'
-import {colors} from '../config/colors'
 import '../css/Students.css'
+import YearPicker from './YearPicker'
+import StudentModal from '../pages/StudentModal'
+import { StudentContext } from '../context/StudentContext'
 
-//---------------TABLE FILTER-------------------------//
+export default function Students({studentsList}) {
+
+  const [tableData, setTableData] = useState(studentsList)
+  const [selectedStudent, setSelectedStudent] = useState(null)
+
+  const {handleUserModal} = useContext(StudentContext)
+
+  const [state, dispatch] = React.useReducer(filterReducer, {
+    column: null,
+    data: tableData,
+    direction: null,
+  })
+  const { column, data, direction } = state
+
+  const handleYearChange = (year, studentsList) => {
+    setTableData(studentsList)
+  }
+
+  //---------------TABLE FILTER-------------------------//
 function filterReducer(state, action) {    
   switch (action.type) {
     case 'CHANGE_SORT':
@@ -26,25 +46,11 @@ function filterReducer(state, action) {
   }
 }
 
-//Table header style
-const tableHeader = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'teal',
-  borderRadius: 3,
-  verticalAlign: 'center'
-  
-}
-export default function Students({studentsList, schoolSemester}) {
-  const [state, dispatch] = React.useReducer(filterReducer, {
-    column: null,
-    data: studentsList,
-    direction: null,
-  })
-  const { column, data, direction } = state
 
-  return (  
+  return (
+    <>
+      <YearPicker pickedYear={handleYearChange}/>
+      <StudentModal />
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
@@ -90,22 +96,30 @@ export default function Students({studentsList, schoolSemester}) {
             <h4>Classroom</h4>
           </Table.HeaderCell>          
           <Table.HeaderCell
+            sorted={column === 'debit' ? direction : null}
+            textAlign="center"
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'debit' })}
+          >
+            <h4>Debit</h4>
+          </Table.HeaderCell>          
+          <Table.HeaderCell
             textAlign='center'
           >
-            <h4>Edit</h4>
+            <h4>Pay</h4>
           </Table.HeaderCell>          
         </Table.Row>
         </Table.Header>
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
-        {data.map(({id, name, lastname, age, course, level, assignedClass}) => (
-          <Table.Row key={id}>
-              <Table.Cell><p>{id}</p></Table.Cell>
-              <Table.Cell><p>{name} {lastname}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{age}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{course}</p></Table.Cell>
-              <Table.Cell textAlign='center'><p>{level}</p></Table.Cell>
-              <Table.Cell ><p>{assignedClass}</p></Table.Cell>
+        {tableData.map((item) => (
+          <Table.Row key={item.id} onClick={() => { handleUserModal(true, item)}}>
+              <Table.Cell><p>{item.id}</p></Table.Cell>
+              <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{item.age}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{item.course}</p></Table.Cell>
+              <Table.Cell textAlign='center'><p>{item.level}</p></Table.Cell>
+              <Table.Cell ><p>{item.assignedClass}</p></Table.Cell>
+              <Table.Cell textAlign='center' ><p>{item.debit}</p></Table.Cell>
               <Table.Cell onClick={() => console.log("click")} textAlign='center'><Icon  name='edit'/></Table.Cell>
           </Table.Row>
         ))}
@@ -113,7 +127,7 @@ export default function Students({studentsList, schoolSemester}) {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row verticalAlign='middle'>
-            <Table.HeaderCell colSpan='7'>            
+            <Table.HeaderCell colSpan='8'>            
               <Menu pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />
@@ -127,6 +141,7 @@ export default function Students({studentsList, schoolSemester}) {
                 </Menu.Item>
               </Menu>
               <Button
+                onClick={() => handleUserModal(true)}
                 icon
                 labelPosition='left'
                 floated='right'
@@ -138,5 +153,6 @@ export default function Students({studentsList, schoolSemester}) {
           </Table.Row>
         </Table.Footer>
       </Table>
+    </>
   )
 }

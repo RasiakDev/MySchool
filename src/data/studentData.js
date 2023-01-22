@@ -78,7 +78,8 @@ export const semesters =
                 'age': 28,
                 'course': 'Italian',
                 'level': 'A2',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'B1 Adult',
+                'debit': 300
             },       
             {
                 "id": 4,
@@ -87,7 +88,8 @@ export const semesters =
                 'age': 18,
                 'course': 'Italian',
                 'level': 'B2',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'A2 Junior',
+                'debit': 400
             },
         ]
     },
@@ -103,7 +105,8 @@ export const semesters =
                 'age': 38,
                 'course': 'Italian',
                 'level': 'B2',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'debit': 250
             },       
             {
                 "id": 6,
@@ -112,7 +115,8 @@ export const semesters =
                 'age': 20,
                 'course': 'German',
                 'level': 'A1',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'debit': 300
             },
         ]
     },
@@ -123,21 +127,23 @@ export const semesters =
         students : [
             {
                 "id": 7,
-                'name': 'Kristi',
-                'lastname': 'Bishqemi',
+                'name': 'Xhevair',
+                'lastname': 'Xherri',
                 'age': 38,
                 'course': 'Italian',
                 'level': 'B2',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'debit': 150
             },       
             {
                 "id": 6,
-                'name': 'Paola',
-                'lastname': 'Biturku',
+                'name': 'Indrit',
+                'lastname': 'Cara',
                 'age': 20,
                 'course': 'German',
                 'level': 'A1',
-                'assignedClass': 'Anglisht B1 Brisejda'
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'debit': 400
             },
         ]
     },
