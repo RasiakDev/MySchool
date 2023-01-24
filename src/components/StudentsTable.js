@@ -9,8 +9,6 @@ import { StudentContext } from '../context/StudentContext'
 export default function Students({studentsList}) {
 
   const [tableData, setTableData] = useState(studentsList)
-  const [selectedStudent, setSelectedStudent] = useState(null)
-
   const {handleUserModal} = useContext(StudentContext)
 
   const [state, dispatch] = React.useReducer(filterReducer, {
@@ -45,7 +43,6 @@ function filterReducer(state, action) {
       throw new Error()
   }
 }
-
 
   return (
     <>

@@ -99,14 +99,14 @@ export const semesters =
         classromCount: 3,
         students : [
             {
-                "id": 7,
-                'name': 'Kristi',
-                'lastname': 'Bishqemi',
-                'age': 38,
-                'course': 'Italian',
-                'level': 'B2',
-                'assignedClass': 'Anglisht B1 Brisejda',
-                'debit': 250
+                id: 7,
+                name: 'Kristi',
+                lastname: 'Bishqemi',
+                age: 38,
+                course: 'Italian',
+                level: 'B2',
+                assignedClass: 'Anglisht B1 Brisejda',
+                debit: 250
             },       
             {
                 "id": 6,

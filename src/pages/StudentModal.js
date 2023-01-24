@@ -1,22 +1,17 @@
-import React, {useContext, useState, createRef} from 'react'
+import React, {useContext} from 'react'
 import { Button, Image, Modal, Form, Icon} from 'semantic-ui-react'
 import {StudentContext} from '../context/StudentContext'
 import { monday } from '../data/scheduleData'
 
 function StudentModal() {
-  // const [open, setOpen] = React.useState(modalVisible)
-  const {modalVisible, modalData, handleUserModal, handleChangeModal, handleSubmit} = useContext(StudentContext)
-  // const [formValue, setFormValue] = useState(
-  //   {
-  //     name: '',
-  //     lastname: '',
-  //     age: 0,
-  //     course: '',
-  //     level: '',
-  //     classroom: '',
-  //     debit: 0
-  //   })
-    // const {name, lastname, age, course, level, classroom, debit} = formValue
+  const { 
+    modalVisible,
+    modalData,
+    handleUserModal,
+    handleChangeModal,
+    handleSubmit,
+    handleChangeSelector,
+  } = useContext(StudentContext)
 
   const courses = [
     {key: 'en', text: 'English', value: 'English'},
@@ -39,12 +34,13 @@ function StudentModal() {
 
 
   return (
+    <>
     <Modal
       onClose={() => handleUserModal(false)}
       onOpen={() => handleUserModal(true)}
       open={modalVisible}
     >
-      <Modal.Header>{modalData != null ? modalData.name + ' '+ modalData.lastname : ""}</Modal.Header>
+      <Modal.Header>{modalData ? modalData.name + ' ' + modalData.lastname : ''}</Modal.Header>
       <Modal.Content image>
         <Image size='small' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
         <Modal.Description style={{width: '100%'}}>
@@ -81,23 +77,26 @@ function StudentModal() {
             <Form.Group>
               <Form.Select
                 name='course'
+                placeholder='Course'
                 options={courses}
                 value={modalData != null ? modalData.course : ""}
-                onChange={handleChangeModal}
+                onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Course"
               />
               <Form.Select
                 options={levels}
                 name='level'
+                placeholder="Level"
                 value={modalData != null ? modalData.level : ""}
-                onChange={handleChangeModal}
+                onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Level"
               />
               <Form.Select
                 options={classroomData}
-                name='classroom'
+                name='assignedClass'
+                placeholder='Classroom'
                 value={modalData != null ? modalData.assignedClass : ""}
-                onChange={handleChangeModal}
+                onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Classroom"
               />
             </Form.Group>
@@ -105,6 +104,8 @@ function StudentModal() {
               <Form.Input
                 label="Debit"
                 name="debit"
+                type="number"
+                placeholder={0}
                 value={modalData != null ? modalData.debit : ""}
                 onChange={handleChangeModal}
                 icon={<Icon name='euro sign' />}
@@ -137,6 +138,7 @@ function StudentModal() {
         />
       </Modal.Actions>
     </Modal>
+    </>
   )
 }
 
