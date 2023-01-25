@@ -8,10 +8,14 @@ export const StudentContext = createContext()
 export function StudentProvider({children}) {
     const [modalVisible, setModalVisible] = useState(null)
     const [modalData, setModalData] = useState(null)
+    const [newEntry, setNewEntry]  = useState(false)
 
     const handleUserModal = (visible, item) => {
         setModalData(item)
         setModalVisible(visible)
+        if(!item){
+            setNewEntry(true)
+        }
     }
     const handleChangeSelector = (e, data) => {
         const {name,value} = data
@@ -32,23 +36,33 @@ export function StudentProvider({children}) {
             }
         })
     }
+
+    const addNewStudent = () => {        
+        setNewEntry(false)
+        studentsList.push(modalData)
+        console.log(studentsList)
+    }
+
     const handleSubmit = () => {
-        semesters.map((item) => {
-            item.students.map((student) => {
-                if(student.id === modalData.id){
-                    if(student != modalData){
-                        student.name = modalData.name;
-                        student.lastname = modalData.lastname;
-                        student.age = modalData.age;
-                        student.assignedClass = modalData.assignedClass;
-                        student.course = modalData.course;
-                        student.debit = modalData.debit
-                        student.level = modalData.level
-                    
-                    }    
-                }
+        if(newEntry){
+            addNewStudent()
+        }else{
+            semesters.map((item) => {
+                item.students.map((student) => {
+                    if(student.id === modalData.id){
+                        if(student !== modalData){
+                            student.name = modalData.name;
+                            student.lastname = modalData.lastname;
+                            student.age = modalData.age;
+                            student.assignedClass = modalData.assignedClass;
+                            student.course = modalData.course;
+                            student.debit = modalData.debit
+                            student.level = modalData.level                    
+                        }    
+                    }
+                })
             })
-        })
+        }
         setModalVisible(false)
     }
     return (

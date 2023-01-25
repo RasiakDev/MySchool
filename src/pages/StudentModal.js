@@ -32,9 +32,7 @@ function StudentModal() {
     }
   })
 
-
   return (
-    <>
     <Modal
       onClose={() => handleUserModal(false)}
       onOpen={() => handleUserModal(true)}
@@ -111,12 +109,9 @@ function StudentModal() {
                 icon={<Icon name='euro sign' />}
                 width={3}
               >                
-              </Form.Input>
-             
-            </Form.Group>
-             
-          </Form>
-          
+              </Form.Input>             
+            </Form.Group>             
+          </Form>          
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
@@ -138,7 +133,7 @@ function StudentModal() {
         />
       </Modal.Actions>
     </Modal>
-    </>
+    
   )
 }
 

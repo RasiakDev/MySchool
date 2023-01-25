@@ -6,8 +6,8 @@ import '../css/Students.css'
 
 export default function Students() {
   
-    const {semesters} = useContext(StudentContext)
-    const [tableData, setTableData] = useState(semesters[0].students)
+    const {semesters, studentsList} = useContext(StudentContext)
+    const [tableData, setTableData] = useState(studentsList)
       
   return (
     <div>      

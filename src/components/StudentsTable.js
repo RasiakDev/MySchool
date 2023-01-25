@@ -9,7 +9,7 @@ import { StudentContext } from '../context/StudentContext'
 export default function Students({studentsList}) {
 
   const [tableData, setTableData] = useState(studentsList)
-  const {handleUserModal} = useContext(StudentContext)
+  const {handleUserModal, semesters} = useContext(StudentContext)
 
   const [state, dispatch] = React.useReducer(filterReducer, {
     column: null,
@@ -20,6 +20,11 @@ export default function Students({studentsList}) {
 
   const handleYearChange = (year, studentsList) => {
     setTableData(studentsList)
+    console.log(studentsList)
+  }
+
+  const allStudents = (item) => {
+    setTableData(item)
   }
 
   //---------------TABLE FILTER-------------------------//
@@ -46,6 +51,7 @@ function filterReducer(state, action) {
 
   return (
     <>
+    <Button onClick={() => setTableData(studentsList)}>All Students</Button>
       <YearPicker pickedYear={handleYearChange}/>
       <StudentModal />
       <Table selectable sortable celled>
