@@ -1,13 +1,11 @@
-import React,{useContext, useEffect, useState} from 'react'
+import React,{useContext} from 'react'
 import {Dropdown } from 'semantic-ui-react'
 import { StudentContext } from '../context/StudentContext'
 
 export default function YearPicker({pickedYear}) {
 
-    const {semesters} = useContext(StudentContext)
-    const [dropDownValue, setDropDownValue] = useState()
-
-    
+    const {semesters,updateTableData} = useContext(StudentContext)
+    const dropDownValue = ''
    
     const options = semesters.map(item => {
         return {
@@ -17,18 +15,15 @@ export default function YearPicker({pickedYear}) {
         }
     })
 
-    const handleChange = (event, value) => {        
-            //find index of selected dropdown value
-            for (let index = 0; index < semesters.length; index++) {
-              const element = semesters[index];        
-              if(element.year === value.value)
-                 //send the picked year value to parent component
-                 pickedYear(value.value, semesters[index].students)
+    const handleChange = (event, {value}) => {
+        for (let index = 0; index < semesters.length; index++) {
+            const element = semesters[index];        
+            if(element.year === value){
+                //send the picked year value to parent component
+                updateTableData(semesters[index].students)
             }
-            setDropDownValue(value.value)
-        
+        }
     }
-
 
 
     return (

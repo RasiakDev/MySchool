@@ -1,15 +1,53 @@
-import React, {createContext, useState, useRef} from 'react'
+import React, {createContext, useState} from 'react'
 import { studentsList, semesters } from '../data/studentData'
+import _ from 'lodash'
 
 export const StudentContext = createContext()
 
-
-
 export function StudentProvider({children}) {
+
     const [modalVisible, setModalVisible] = useState(null)
     const [modalData, setModalData] = useState(null)
     const [newEntry, setNewEntry]  = useState(false)
+    const [tableData, setTableData] = useState(studentsList)
 
+    //update the students table by year or
+    const updateTableData = (data) => {
+        if(data !== undefined || data !== null){
+            setTableData(data)            
+        }
+        else{
+            setTableData(studentsList)
+        }        
+    }
+
+    //Filter the students table
+    const [state, dispatch] = React.useReducer(filterReducer, {
+        column: null,
+        data: tableData,
+        direction: null,
+      })
+    function filterReducer(state, action) {    
+        switch (action.type) {
+          case 'CHANGE_SORT':
+            if (state.column === action.column) {
+              return {
+                ...state,
+                data: state.data.slice().reverse(),
+                direction:
+                  state.direction === 'ascending' ? 'descending' : 'ascending',
+              }
+            }  
+            return {
+              column: action.column,
+              data: _.sortBy(state.data, [action.column]),
+              direction: 'ascending',
+            }
+          default:
+            throw new Error()
+        }
+    }
+    //Set modal visible, get the input to be updated or check if input is empty to add new student
     const handleUserModal = (visible, item) => {
         setModalData(item)
         setModalVisible(visible)
@@ -17,6 +55,7 @@ export function StudentProvider({children}) {
             setNewEntry(true)
         }
     }
+    //Handle selector inputs StudentModal
     const handleChangeSelector = (e, data) => {
         const {name,value} = data
         setModalData((prevState) => {
@@ -26,7 +65,7 @@ export function StudentProvider({children}) {
             }
         })
     }
-
+    //Handle inputs in StudentModal
     const handleChangeModal = (e) => {
         const {name, value} = e.target
         setModalData((prevState) => {
@@ -36,19 +75,14 @@ export function StudentProvider({children}) {
             }
         })
     }
-
-    const addNewStudent = () => {        
-        setNewEntry(false)
-        studentsList.push(modalData)
-        console.log(studentsList)
-    }
-
+    //Handle StudentModal submit
     const handleSubmit = () => {
         if(newEntry){
-            addNewStudent()
+            setNewEntry(false)
+            studentsList.push(modalData)
         }else{
-            semesters.map((item) => {
-                item.students.map((student) => {
+            semesters.forEach((item) => {
+                item.students.forEach((student) => {
                     if(student.id === modalData.id){
                         if(student !== modalData){
                             student.name = modalData.name;
@@ -63,15 +97,21 @@ export function StudentProvider({children}) {
                 })
             })
         }
-        setModalVisible(false)
+        setModalVisible(false)       
     }
+
     return (
         <StudentContext.Provider 
             value={{
                 studentsList, 
                 semesters,
                 modalVisible,
-                modalData,              
+                modalData,
+                state,
+                tableData,
+                updateTableData,
+                setTableData,
+                dispatch,
                 handleUserModal,
                 handleChangeModal,
                 handleChangeSelector,

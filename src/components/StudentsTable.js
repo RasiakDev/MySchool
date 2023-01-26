@@ -1,121 +1,81 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import { Menu, Icon, Table, Button } from 'semantic-ui-react'
-import _ from 'lodash'
 import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
 
-export default function Students({studentsList}) {
-
-  const [tableData, setTableData] = useState(studentsList)
-  const {handleUserModal, semesters} = useContext(StudentContext)
-
-  const [state, dispatch] = React.useReducer(filterReducer, {
-    column: null,
-    data: tableData,
-    direction: null,
-  })
-  const { column, data, direction } = state
-
-  const handleYearChange = (year, studentsList) => {
-    setTableData(studentsList)
-    console.log(studentsList)
-  }
-
-  const allStudents = (item) => {
-    setTableData(item)
-  }
-
-  //---------------TABLE FILTER-------------------------//
-function filterReducer(state, action) {    
-  switch (action.type) {
-    case 'CHANGE_SORT':
-      if (state.column === action.column) {
-        return {
-          ...state,
-          data: state.data.slice().reverse(),
-          direction:
-            state.direction === 'ascending' ? 'descending' : 'ascending',
-        }
-      }  
-      return {
-        column: action.column,
-        data: _.sortBy(state.data, [action.column]),
-        direction: 'ascending',
-      }
-    default:
-      throw new Error()
-  }
-}
+export default function Students() {
+  const {handleUserModal, updateTableData, tableData, state, dispatch} = useContext(StudentContext)
+  const { column, direction } = state
 
   return (
     <>
-    <Button onClick={() => setTableData(studentsList)}>All Students</Button>
-      <YearPicker pickedYear={handleYearChange}/>
+      <Button onClick={() => updateTableData()}>All Students</Button>
+      <YearPicker/>
       <StudentModal />
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell
-            width={2}
-            sorted={column === 'id' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'id' })}
-          >
-            <h4>Nr. Amze</h4>
-          </Table.HeaderCell>
-          <Table.HeaderCell
-            sorted={column === 'name' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
-          >
-            <h4>Name</h4>
-          </Table.HeaderCell>
-          <Table.HeaderCell
-            textAlign='center'
-            sorted={column === 'age' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })} 
-          >
-              <h4>Age</h4>
-          </Table.HeaderCell>
-          <Table.HeaderCell 
-            sorted={column === 'course' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'course' })}
-            textAlign='center'
-          >
-              <h4>Course</h4>
-          </Table.HeaderCell>
-          <Table.HeaderCell
-            sorted={column === 'level' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'level' })}
-            textAlign='center'
-          >
-              <h4>Level</h4>
-          </Table.HeaderCell>          
-          <Table.HeaderCell
-            sorted={column === 'classroom' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'classroom' })}
-          >
-            <h4>Classroom</h4>
-          </Table.HeaderCell>          
-          <Table.HeaderCell
-            sorted={column === 'debit' ? direction : null}
-            textAlign="center"
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'debit' })}
-          >
-            <h4>Debit</h4>
-          </Table.HeaderCell>          
-          <Table.HeaderCell
-            textAlign='center'
-          >
-            <h4>Pay</h4>
-          </Table.HeaderCell>          
-        </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell
+              width={2}
+              sorted={column === 'id' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'id' })}
+            >
+              <h4>Nr. Amze</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'name' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
+            >
+              <h4>Name</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              textAlign='center'
+              sorted={column === 'age' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })} 
+            >
+                <h4>Age</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell 
+              sorted={column === 'course' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'course' })}
+              textAlign='center'
+            >
+                <h4>Course</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'level' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'level' })}
+              textAlign='center'
+            >
+                <h4>Level</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'classroom' ? direction : null}
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'classroom' })}
+            >
+              <h4>Classroom</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={column === 'debit' ? direction : null}
+              textAlign="center"
+              onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'debit' })}
+            >
+              <h4>Debit</h4>
+            </Table.HeaderCell>
+            <Table.HeaderCell
+              textAlign='center'
+            >
+              <h4>Pay</h4>
+            </Table.HeaderCell>
+          </Table.Row>
         </Table.Header>
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
-        {tableData.map((item) => (
-          <Table.Row key={item.id} onClick={() => { handleUserModal(true, item)}}>
+          {tableData.map((item, key) => (
+          <Table.Row key={key} onClick={() => { handleUserModal(true, item)}}>
               <Table.Cell><p>{item.id}</p></Table.Cell>
               <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{item.age}</p></Table.Cell>
@@ -130,7 +90,7 @@ function filterReducer(state, action) {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row verticalAlign='middle'>
-            <Table.HeaderCell colSpan='8'>            
+            <Table.HeaderCell colSpan='8'>
               <Menu pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />
@@ -144,6 +104,7 @@ function filterReducer(state, action) {
                 </Menu.Item>
               </Menu>
               <Button
+                type='submit'
                 onClick={() => handleUserModal(true)}
                 icon
                 labelPosition='left'
@@ -151,7 +112,7 @@ function filterReducer(state, action) {
                 primary>
                   <Icon name='user'/>
                   Add Student
-                </Button>            
+                </Button>
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
