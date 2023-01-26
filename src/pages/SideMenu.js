@@ -6,10 +6,13 @@ import colors from '../config/colors'
 function SideMenu({children}) {
 
     const [visible, setVisible] = useState(true)
+    const [width, setWidth] = useState('85%')
 
   return (
         <Sidebar.Pushable className="container">
             <Sidebar
+            onHide={() => setWidth('95%')}
+            onShow={() => width('90%')}
             className='sidebar'
             as={Menu}
             icon='labeled'
@@ -60,14 +63,9 @@ function SideMenu({children}) {
                 </Link>
                 
             </Sidebar>
-        
-            <Sidebar.Pusher >
-                {/* <Header size='small' as={Segment} inverted >
-                    <Container fluid onClick={() => setVisible((prevState) => !prevState )}>
-
-                        <Icon name='list' size='large'  />                    
-                    </Container>
-                </Header> */}
+            
+            <Sidebar.Pusher style={{width: width, paddingLeft: 60, paddingRight: 60, paddingTop: 30,display: 'flex', justifyContent:'center', overflowY: 'scroll'}}  >
+                
 
                 {!visible && (
                     <Icon 
@@ -78,9 +76,8 @@ function SideMenu({children}) {
                         onClick={() => setVisible((prevState) => !prevState )}
                     />
                 )}
-                <Container className="childContainer">
                     {children}
-                </Container>
+                
             
             </Sidebar.Pusher>
             

@@ -4,9 +4,9 @@
 }
 
 .childContainer {
-  overflow: scroll;
-  height: 100vh;
-  width: 2000px;
+  width: 90%;
+  height: 100%;
+  overflow-y: auto;
   margin-top: 40px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;

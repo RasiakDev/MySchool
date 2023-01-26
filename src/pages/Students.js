@@ -10,7 +10,7 @@ export default function Students() {
     const [tableData, setTableData] = useState(studentsList)
       
   return (
-    <div>      
+    <div style={{width: '90%'}}>      
       <StudentsTable studentsList={tableData}/>
     </div>
   )
