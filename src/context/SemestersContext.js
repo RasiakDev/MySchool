@@ -6,12 +6,13 @@ export const SemestersContext = createContext()
 
 export function SemestersProvider({children}) {
 
-    const {checkedArray} = useContext(StudentContext)
+    const {checkedArray, setCheckedArray} = useContext(StudentContext)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [inputValue, setInputValue] = useState([{
         year: '',
-        students: checkedArray
+        students: [],
+        classrooms: [],
     }])
 
     // handle Semester name input 
@@ -20,16 +21,17 @@ export function SemestersProvider({children}) {
        setInputValue((prevState) => {
            return{
                ...prevState,
-               [name] : value,
-               
+               [name] : value,               
            }
-       })
-       console.log(checkedArray)
+        })
+        inputValue.students = checkedArray
     }
 
     //submit new season
     const addNewSeason = () => {
         semesters.push(inputValue)
+        setModalVisible(false)
+        setCheckedArray([])
         console.log(semesters)
     }
 

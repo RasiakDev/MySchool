@@ -2,7 +2,7 @@ import React,{useState, useContext} from 'react'
 import { Button, Modal, Input, Checkbox } from 'semantic-ui-react'
 import StudentsTable from '../components/StudentsTable'
 import { SemestersContext } from '../context/SemestersContext'
-
+import { StudentContext } from '../context/StudentContext'
 export default function AddNewSemester() {
     const {
         modalVisible,
@@ -11,6 +11,8 @@ export default function AddNewSemester() {
         handleChange,
         inputValue,
     } = useContext(SemestersContext)
+    
+    const {checkedArray, setCheckedArray} = useContext(StudentContext)
     
     const handleCheckList = (val) => {
         console.log(val)

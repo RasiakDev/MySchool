@@ -30,7 +30,7 @@ export default function StudentsTable() {
           onChange={() => setSelectCheckbox(val => !val)}
           style={{float: 'right'}}
           toggle
-          label={selectCheckBox ? "Enter in Edit Mode" : 'Enter in Select Mode'}
+          label={!selectCheckBox ? "Enter in Edit Mode" : 'Exit from Edit Mode'}
           
       />
       <StudentModal />
@@ -38,7 +38,7 @@ export default function StudentsTable() {
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
           <Table.Row>
-           {selectCheckBox && <Table.HeaderCell/>}
+           {!selectCheckBox && <Table.HeaderCell/>}
             <Table.HeaderCell
               width={2}
               sorted={column === 'id' ? direction : null}
@@ -96,10 +96,10 @@ export default function StudentsTable() {
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
           {tableData.map((item, key) => (
-          <Table.Row key={key} onClick={() => {!selectCheckBox && handleUserModal(true, item)}}>
-              {selectCheckBox &&
+          <Table.Row key={key} onClick={() => {selectCheckBox && handleUserModal(true, item)}}>
+              {!selectCheckBox &&
               <Table.Cell className='checkbox' collapsing>
-                <Checkbox onChange={() => {checkedArray.push(item); console.log(checkedArray)} }/>
+                <Checkbox onChange={() => {checkedArray.push(item); console.log(checkedArray)}}/>
               </Table.Cell>}
               <Table.Cell><p>{item.id}</p></Table.Cell>
               <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
@@ -115,7 +115,7 @@ export default function StudentsTable() {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row verticalAlign='middle'>
-            <Table.HeaderCell colSpan={selectCheckBox ? '9' : '8'}>
+            <Table.HeaderCell colSpan={!selectCheckBox ? '9' : '8'}>
               <Menu pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />

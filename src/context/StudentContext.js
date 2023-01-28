@@ -52,7 +52,6 @@ export function StudentProvider({children}) {
     //Set modal visible, get the input to be updated or check if input is empty to add new student
     const handleUserModal = (visible, item) => {
         setModalData(item)
-        console.log(item)
         setModalVisible(visible)
         if(!item){
             setNewEntry(true)
@@ -126,6 +125,7 @@ export function StudentProvider({children}) {
                 tableData,
                 selectCheckBox,
                 checkedArray,
+                setCheckedArray,
                 setSelectCheckbox,
                 updateTableData,
                 setTableData,
