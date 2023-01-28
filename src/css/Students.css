@@ -8,3 +8,7 @@
 .students {
   overflow: auto;
 }
+
+.checkbox {
+  z-index: 4;
+}

@@ -6,7 +6,8 @@ export const studentsList = [
         'age': 27,
         'course': 'English',
         'level': 'B2',
-        'assignedClass': 'Anglisht B1 Etoni'
+        'assignedClass': 'Anglisht B1 Etoni',
+        'seasons': [ 'Summer 2022' ,'2022 - 2023']
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@ export const studentsList = [
         'age': 27,
         'course': 'English',
         'level': 'B2',
-        'assignedClass': 'Anglisht B2 Inriti'
+        'assignedClass': 'Anglisht B2 Inriti',
+        'seasons': ['2021 - 2022', 'Summer 2022']
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@ export const studentsList = [
         'age': 28,
         'course': 'Italian',
         'level': 'A2',
-        'assignedClass': 'Anglisht B1 Brisejda'
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2022 - 2023']
     },       
     {
         "id": 4,
@@ -33,7 +36,8 @@ export const studentsList = [
         'age': 18,
         'course': 'Italian',
         'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2022 - 2023']
     },       
     {
         "id": 5,
@@ -42,7 +46,8 @@ export const studentsList = [
         'age': 33,
         'course': 'German',
         'level': 'C1',
-        'assignedClass': 'Anglisht B1 Brisejda'
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
     },       
     {
         "id": 6,
@@ -51,7 +56,8 @@ export const studentsList = [
         'age': 20,
         'course': 'German',
         'level': 'A1',
-        'assignedClass': 'Anglisht B1 Brisejda'
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
     },       
     {
         "id": 7,
@@ -60,7 +66,128 @@ export const studentsList = [
         'age': 38,
         'course': 'Italian',
         'level': 'B2',
-        'assignedClass': 'Anglisht B1 Brisejda'
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 4,
+        'name': 'Antuen',
+        'lastname': 'Basha',
+        'age': 18,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2022 - 2023']
+    },       
+    {
+        "id": 5,
+        'name': 'Antonela',
+        'lastname': 'Saliu',
+        'age': 33,
+        'course': 'German',
+        'level': 'C1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 6,
+        'name': 'Paola',
+        'lastname': 'Biturku',
+        'age': 20,
+        'course': 'German',
+        'level': 'A1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 4,
+        'name': 'Antuen',
+        'lastname': 'Basha',
+        'age': 18,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2022 - 2023']
+    },       
+    {
+        "id": 5,
+        'name': 'Antonela',
+        'lastname': 'Saliu',
+        'age': 33,
+        'course': 'German',
+        'level': 'C1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 6,
+        'name': 'Paola',
+        'lastname': 'Biturku',
+        'age': 20,
+        'course': 'German',
+        'level': 'A1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 4,
+        'name': 'Antuen',
+        'lastname': 'Basha',
+        'age': 18,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2022 - 2023']
+    },       
+    {
+        "id": 5,
+        'name': 'Antonela',
+        'lastname': 'Saliu',
+        'age': 33,
+        'course': 'German',
+        'level': 'C1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 6,
+        'name': 'Paola',
+        'lastname': 'Biturku',
+        'age': 20,
+        'course': 'German',
+        'level': 'A1',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
+    },       
+    {
+        "id": 7,
+        'name': 'Kristi',
+        'lastname': 'Bishqemi',
+        'age': 38,
+        'course': 'Italian',
+        'level': 'B2',
+        'assignedClass': 'Anglisht B1 Brisejda',
+        'seasons': ['2021 - 2022', 'Summer 2022']
     },       
   ]
 
@@ -72,6 +199,16 @@ export const semesters =
         classromCount: 4,
         students : [
             {
+                "id": 1,
+                'name': 'Besmir',
+                'lastname': 'Guma',
+                'age': 27,
+                'course': 'English',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B1 Etoni',
+                'seasons': ['2022 - 2023']
+            },
+            {
                 "id": 3,
                 'name': 'Gezim',
                 'lastname': 'Hovi',
@@ -79,7 +216,8 @@ export const semesters =
                 'course': 'Italian',
                 'level': 'A2',
                 'assignedClass': 'B1 Adult',
-                'debit': 300
+                'debit': 300,
+                'seasons': ['2022 - 2023']
             },       
             {
                 "id": 4,
@@ -89,7 +227,8 @@ export const semesters =
                 'course': 'Italian',
                 'level': 'B2',
                 'assignedClass': 'A2 Junior',
-                'debit': 400
+                'debit': 400,
+                'seasons': ['2022 - 2023']
             },
         ]
     },
@@ -99,15 +238,45 @@ export const semesters =
         classromCount: 3,
         students : [
             {
-                id: 7,
-                name: 'Kristi',
-                lastname: 'Bishqemi',
-                age: 38,
-                course: 'Italian',
-                level: 'B2',
-                assignedClass: 'Anglisht B1 Brisejda',
-                debit: 250
-            },       
+                "id": 1,
+                'name': 'Besmir',
+                'lastname': 'Guma',
+                'age': 27,
+                'course': 'English',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B1 Etoni',
+                'seasons': ['2022 - 2023']
+            },
+            {
+                "id": 5,
+                'name': 'Antonela',
+                'lastname': 'Saliu',
+                'age': 33,
+                'course': 'German',
+                'level': 'C1',
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'seasons': ['2021 - 2022','Summer 2022']
+            },  
+            {
+                "id": 2,
+                'name': 'Ensuela',
+                'lastname': 'Germenji',
+                'age': 27,
+                'course': 'English',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B2 Inriti',
+                'seasons': ['2021 - 2022', 'Summer 2022']
+            },
+            {
+                "id": 7,
+                'name': 'Kristi',
+                'lastname': 'Bishqemi',
+                'age': 38,
+                'course': 'Italian',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'seasons': ['2021 - 2022', 'Summer 2022']
+            },     
             {
                 "id": 6,
                 'name': 'Paola',
@@ -116,8 +285,8 @@ export const semesters =
                 'course': 'German',
                 'level': 'A1',
                 'assignedClass': 'Anglisht B1 Brisejda',
-                'debit': 300
-            },
+                'seasons': ['2021 - 2022', 'Summer 2022']
+            }, 
         ]
     },
     {
@@ -126,25 +295,45 @@ export const semesters =
         classromCount: 3,
         students : [
             {
-                "id": 7,
-                'name': 'Xhevair',
-                'lastname': 'Xherri',
-                'age': 38,
-                'course': 'Italian',
+                "id": 2,
+                'name': 'Ensuela',
+                'lastname': 'Germenji',
+                'age': 27,
+                'course': 'English',
                 'level': 'B2',
+                'assignedClass': 'Anglisht B2 Inriti',
+                'seasons': ['2021 - 2022', 'Summer 2022']
+            },
+            {
+                "id": 5,
+                'name': 'Antonela',
+                'lastname': 'Saliu',
+                'age': 33,
+                'course': 'German',
+                'level': 'C1',
                 'assignedClass': 'Anglisht B1 Brisejda',
-                'debit': 150
-            },       
+                'seasons': ['2021 - 2022','Summer 2022']
+            },        
             {
                 "id": 6,
-                'name': 'Indrit',
-                'lastname': 'Cara',
+                'name': 'Paola',
+                'lastname': 'Biturku',
                 'age': 20,
                 'course': 'German',
                 'level': 'A1',
                 'assignedClass': 'Anglisht B1 Brisejda',
-                'debit': 400
+                'seasons': ['2021 - 2022', 'Summer 2022']
             },
+            {
+                "id": 7,
+                'name': 'Kristi',
+                'lastname': 'Bishqemi',
+                'age': 38,
+                'course': 'Italian',
+                'level': 'B2',
+                'assignedClass': 'Anglisht B1 Brisejda',
+                'seasons': ['2021 - 2022', 'Summer 2022']
+            }, 
         ]
     },
 

@@ -1,11 +1,11 @@
 import React, {useContext} from 'react'
-import { Menu, Icon, Table, Button } from 'semantic-ui-react'
+import { Menu, Icon, Table, Button, Checkbox } from 'semantic-ui-react'
 import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
 
-export default function Students() {
+export default function StudentsTable({checkbox}) {
   const {handleUserModal, updateTableData, tableData, state, dispatch} = useContext(StudentContext)
   const { column, direction } = state
 
@@ -18,6 +18,7 @@ export default function Students() {
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
           <Table.Row>
+           {checkbox && <Table.HeaderCell selectable={false}/>}
             <Table.HeaderCell
               width={2}
               sorted={column === 'id' ? direction : null}
@@ -76,6 +77,7 @@ export default function Students() {
         <Table.Body>
           {tableData.map((item, key) => (
           <Table.Row key={key} onClick={() => { handleUserModal(true, item)}}>
+              {checkbox &&<Table.Cell className='checkbox' collapsing><Checkbox></Checkbox></Table.Cell>}
               <Table.Cell><p>{item.id}</p></Table.Cell>
               <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{item.age}</p></Table.Cell>
@@ -90,7 +92,7 @@ export default function Students() {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row verticalAlign='middle'>
-            <Table.HeaderCell colSpan='8'>
+            <Table.HeaderCell colSpan={checkbox ? '9' : '8'}>
               <Menu pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />

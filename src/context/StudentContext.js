@@ -11,13 +11,13 @@ export function StudentProvider({children}) {
     const [newEntry, setNewEntry]  = useState(false)
     const [tableData, setTableData] = useState(studentsList)
 
-    //update the students table by year or
+    //show table data by year or all students list
     const updateTableData = (data) => {
-        if(data !== undefined || data !== null){
-            setTableData(data)            
+        if(data === undefined || data === null){
+            setTableData(studentsList)                
         }
         else{
-            setTableData(studentsList)
+            setTableData(data)        
         }        
     }
 
@@ -50,6 +50,7 @@ export function StudentProvider({children}) {
     //Set modal visible, get the input to be updated or check if input is empty to add new student
     const handleUserModal = (visible, item) => {
         setModalData(item)
+        console.log(item)
         setModalVisible(visible)
         if(!item){
             setNewEntry(true)
@@ -95,6 +96,18 @@ export function StudentProvider({children}) {
                         }    
                     }
                 })
+            })
+
+            studentsList.forEach((student) => {
+                if(student.id === modalData.id){
+                    student.name = modalData.name;
+                            student.lastname = modalData.lastname;
+                            student.age = modalData.age;
+                            student.assignedClass = modalData.assignedClass;
+                            student.course = modalData.course;
+                            student.debit = modalData.debit
+                            student.level = modalData.level    
+                }
             })
         }
         setModalVisible(false)       

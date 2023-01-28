@@ -4,7 +4,8 @@ import {StudentContext} from '../context/StudentContext'
 import { monday } from '../data/scheduleData'
 
 function StudentModal() {
-  const { 
+  const {
+    semesters,
     modalVisible,
     modalData,
     handleUserModal,
@@ -31,6 +32,15 @@ function StudentModal() {
       value: item.name
     }
   })
+
+  const academicYears = semesters.map((item) =>{
+    return {
+      key: item.year,
+      text: item.year,
+      value: item.year
+    }
+})
+  
 
   return (
     <Modal
@@ -108,8 +118,17 @@ function StudentModal() {
                 onChange={handleChangeModal}
                 icon={<Icon name='euro sign' />}
                 width={3}
-              >                
-              </Form.Input>             
+              >
+              </Form.Input>
+              <Form.Select
+                options={academicYears}
+                name='year'
+                placeholder='Season'
+                defaultValue={modalData && modalData.seasons[modalData.seasons.length -1]}
+                value={modalData ? modalData.seaons : ''}
+                onChange={(e, data) => handleChangeSelector(e, data)}
+                label="Season"
+              />
             </Form.Group>             
           </Form>          
         </Modal.Description>
@@ -126,6 +145,7 @@ function StudentModal() {
         </Button>
         <Button
           content="Save"
+          type='submit'
           labelPosition='right'
           icon='checkmark'
           onClick={handleSubmit}
