@@ -195,8 +195,6 @@ export const semesters =
 [
     {
         year : '2022 - 2023',
-        studentCount: 2,
-        classromCount: 4,
         students : [
             {
                 "id": 1,

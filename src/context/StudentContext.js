@@ -10,6 +10,8 @@ export function StudentProvider({children}) {
     const [modalData, setModalData] = useState(null)
     const [newEntry, setNewEntry]  = useState(false)
     const [tableData, setTableData] = useState(studentsList)
+    const [selectCheckBox, setSelectCheckbox] = useState(false)
+    const [checkedArray, setCheckedArray] = useState([])
 
     //show table data by year or all students list
     const updateTableData = (data) => {
@@ -101,12 +103,12 @@ export function StudentProvider({children}) {
             studentsList.forEach((student) => {
                 if(student.id === modalData.id){
                     student.name = modalData.name;
-                            student.lastname = modalData.lastname;
-                            student.age = modalData.age;
-                            student.assignedClass = modalData.assignedClass;
-                            student.course = modalData.course;
-                            student.debit = modalData.debit
-                            student.level = modalData.level    
+                    student.lastname = modalData.lastname;
+                    student.age = modalData.age;
+                    student.assignedClass = modalData.assignedClass;
+                    student.course = modalData.course;
+                    student.debit = modalData.debit
+                    student.level = modalData.level    
                 }
             })
         }
@@ -122,6 +124,9 @@ export function StudentProvider({children}) {
                 modalData,
                 state,
                 tableData,
+                selectCheckBox,
+                checkedArray,
+                setSelectCheckbox,
                 updateTableData,
                 setTableData,
                 dispatch,

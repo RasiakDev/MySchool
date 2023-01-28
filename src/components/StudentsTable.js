@@ -4,21 +4,41 @@ import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
+import { SemestersContext } from '../context/SemestersContext'
 
-export default function StudentsTable({checkbox}) {
-  const {handleUserModal, updateTableData, tableData, state, dispatch} = useContext(StudentContext)
+export default function StudentsTable() {
+  const {
+    handleUserModal,
+    updateTableData,
+    tableData,
+    state,
+    dispatch,
+    checkedArray,
+    setCheckedArray,
+    selectCheckBox,
+    setSelectCheckbox
+
+  } = useContext(StudentContext)
   const { column, direction } = state
 
   return (
     <>
       <Button onClick={() => updateTableData()}>All Students</Button>
       <YearPicker/>
+      <Checkbox
+          checked={selectCheckBox}
+          onChange={() => setSelectCheckbox(val => !val)}
+          style={{float: 'right'}}
+          toggle
+          label={selectCheckBox ? "Enter in Edit Mode" : 'Enter in Select Mode'}
+          
+      />
       <StudentModal />
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
           <Table.Row>
-           {checkbox && <Table.HeaderCell selectable={false}/>}
+           {selectCheckBox && <Table.HeaderCell/>}
             <Table.HeaderCell
               width={2}
               sorted={column === 'id' ? direction : null}
@@ -76,8 +96,11 @@ export default function StudentsTable({checkbox}) {
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
           {tableData.map((item, key) => (
-          <Table.Row key={key} onClick={() => { handleUserModal(true, item)}}>
-              {checkbox &&<Table.Cell className='checkbox' collapsing><Checkbox></Checkbox></Table.Cell>}
+          <Table.Row key={key} onClick={() => {!selectCheckBox && handleUserModal(true, item)}}>
+              {selectCheckBox &&
+              <Table.Cell className='checkbox' collapsing>
+                <Checkbox onChange={() => {checkedArray.push(item); console.log(checkedArray)} }/>
+              </Table.Cell>}
               <Table.Cell><p>{item.id}</p></Table.Cell>
               <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
               <Table.Cell textAlign='center'><p>{item.age}</p></Table.Cell>
@@ -92,7 +115,7 @@ export default function StudentsTable({checkbox}) {
         {/* -----------------TABLE FOOTER------------------------ */}
         <Table.Footer>
           <Table.Row verticalAlign='middle'>
-            <Table.HeaderCell colSpan={checkbox ? '9' : '8'}>
+            <Table.HeaderCell colSpan={selectCheckBox ? '9' : '8'}>
               <Menu pagination>
                 <Menu.Item as='a' icon>
                   <Icon name='chevron left' />
