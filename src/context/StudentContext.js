@@ -11,15 +11,32 @@ export function StudentProvider({children}) {
     const [newEntry, setNewEntry]  = useState(false)
     const [tableData, setTableData] = useState(studentsList)
     const [selectCheckBox, setSelectCheckbox] = useState(false)
+    const [checkboxValue, setCheckboxValue] = useState(false)
     const [checkedArray, setCheckedArray] = useState([])
+    const [dropDownValue, setDropdownValue] = useState('')
+
+    const handleCheckbox = (evt, data, item) => {       
+        const found = checkedArray.some((element)=> {
+            return item.id == element.id
+        })
+        if(data.checked){
+            if(!found){
+                checkedArray.push(item)
+            }else{
+                console.log('found')
+            }
+        }
+    }
 
     //show table data by year or all students list
-    const updateTableData = (data) => {
+    const updateTableData = (e, data) => {
         if(data === undefined || data === null){
-            setTableData(studentsList)                
+            setTableData(studentsList)       
+            setDropdownValue('')    
         }
         else{
-            setTableData(data)        
+            setTableData(data)
+            setDropdownValue(e)
         }        
     }
 
@@ -119,12 +136,16 @@ export function StudentProvider({children}) {
             value={{
                 studentsList, 
                 semesters,
+                dropDownValue,
                 modalVisible,
                 modalData,
                 state,
                 tableData,
                 selectCheckBox,
                 checkedArray,
+                checkboxValue,
+                setCheckboxValue,
+                handleCheckbox,
                 setCheckedArray,
                 setSelectCheckbox,
                 updateTableData,

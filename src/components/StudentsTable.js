@@ -13,8 +13,9 @@ export default function StudentsTable() {
     tableData,
     state,
     dispatch,
-    checkedArray,
-    setCheckedArray,
+    setCheckboxValue,
+    checkBoxValue,
+    handleCheckbox,
     selectCheckBox,
     setSelectCheckbox
 
@@ -86,20 +87,20 @@ export default function StudentsTable() {
             >
               <h4>Debit</h4>
             </Table.HeaderCell>
-            <Table.HeaderCell
+            {!selectCheckBox &&<Table.HeaderCell
               textAlign='center'
             >
               <h4>Pay</h4>
-            </Table.HeaderCell>
+            </Table.HeaderCell>}
           </Table.Row>
         </Table.Header>
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
-          {tableData.map((item, key) => (
-          <Table.Row key={key} onClick={() => {selectCheckBox && handleUserModal(true, item)}}>
+          {tableData.map((item) => (
+          <Table.Row key={item.id} onClick={() => {selectCheckBox && handleUserModal(true, item)}}>
               {!selectCheckBox &&
               <Table.Cell className='checkbox' collapsing>
-                <Checkbox onChange={() => {checkedArray.push(item); console.log(checkedArray)}}/>
+                <Checkbox onChange={(event, data) => handleCheckbox(event, data, item)}/>
               </Table.Cell>}
               <Table.Cell><p>{item.id}</p></Table.Cell>
               <Table.Cell><p>{item.name} {item.lastname}</p></Table.Cell>
@@ -108,7 +109,7 @@ export default function StudentsTable() {
               <Table.Cell textAlign='center'><p>{item.level}</p></Table.Cell>
               <Table.Cell ><p>{item.assignedClass}</p></Table.Cell>
               <Table.Cell textAlign='center' ><p>{item.debit}</p></Table.Cell>
-              <Table.Cell onClick={() => console.log("click")} textAlign='center'><Icon  name='edit'/></Table.Cell>
+              {!selectCheckBox && <Table.Cell onClick={() => console.log("click")} textAlign='center'><Icon  name='edit'/></Table.Cell>}
           </Table.Row>
         ))}
         </Table.Body>        
