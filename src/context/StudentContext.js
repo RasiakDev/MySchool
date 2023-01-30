@@ -15,6 +15,49 @@ export function StudentProvider({children}) {
     const [checkedArray, setCheckedArray] = useState([])
     const [dropDownValue, setDropdownValue] = useState('')
 
+    const [errorState, setErrorState] = useState({
+        name: false,
+        lastname:false,
+        id: false,
+        course: false,
+        level: false,
+        assignedClass: false,
+        debit: false,
+        year: false 
+        
+    }) 
+
+    const formValidation = (e) => {
+        const {name, value} = e.target
+        switch (name) {
+            case 'name':
+                if(value.length < 1){
+                    setErrorState((prevState)=>{
+                        return{
+                            ...prevState,
+                            [name]: true
+                        }
+                    })
+                }else{setErrorState((prevState)=>{
+                    return{
+                        ...prevState,
+                        [name]: false
+                    }
+                })}
+
+        
+            default:
+                break;
+        }
+
+        // setErrorState((prevState)=>{
+        //     return{
+        //         ...prevState,
+        //         [name]: true
+        //     }
+        // })
+        
+    }
     const handleCheckbox = (evt, data, item) => {       
         const found = checkedArray.some((element)=> {
             return item.id == element.id
@@ -98,9 +141,16 @@ export function StudentProvider({children}) {
     const handleSubmit = () => {
         if(newEntry){
             setNewEntry(false)
+            //push to all students list
             studentsList.push(modalData)
+            //push to selected year
+            semesters.forEach((item) => {
+                if(modalData.year === item.year)
+                    item.students.push((modalData))
+            })
         }else{
             semesters.forEach((item) => {
+                //semesters list
                 item.students.forEach((student) => {
                     if(student.id === modalData.id){
                         if(student !== modalData){
@@ -110,12 +160,13 @@ export function StudentProvider({children}) {
                             student.assignedClass = modalData.assignedClass;
                             student.course = modalData.course;
                             student.debit = modalData.debit
-                            student.level = modalData.level                    
+                            student.level = modalData.level
+                            student.seasons.push(modalData.year)
                         }    
                     }
                 })
             })
-
+            //all students list
             studentsList.forEach((student) => {
                 if(student.id === modalData.id){
                     student.name = modalData.name;
@@ -124,9 +175,11 @@ export function StudentProvider({children}) {
                     student.assignedClass = modalData.assignedClass;
                     student.course = modalData.course;
                     student.debit = modalData.debit
-                    student.level = modalData.level    
+                    student.level = modalData.level
+                    student.seasons.push(modalData.year)
                 }
             })
+            
         }
         setModalVisible(false)       
     }
@@ -144,6 +197,8 @@ export function StudentProvider({children}) {
                 selectCheckBox,
                 checkedArray,
                 checkboxValue,
+                errorState,
+                formValidation,
                 setCheckboxValue,
                 handleCheckbox,
                 setCheckedArray,

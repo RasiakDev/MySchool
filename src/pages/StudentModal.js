@@ -12,7 +12,20 @@ function StudentModal() {
     handleChangeModal,
     handleSubmit,
     handleChangeSelector,
+    errorState,
+    formValidation
   } = useContext(StudentContext)
+
+  const 
+    {
+      name,
+      lastname,
+      course,
+      level,
+      assignedClass,
+      id,
+      year
+    } = errorState
 
   const courses = [
     {key: 'en', text: 'English', value: 'English'},
@@ -59,6 +72,8 @@ function StudentModal() {
                 placeholder="Name"
                 name="name"
                 type='text'
+                error={name}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.name : ""}
                 onChange={handleChangeModal}
                 width={5}
@@ -68,6 +83,8 @@ function StudentModal() {
                 placeholder="Last Name"
                 name='lastname'
                 type='text'
+                error={lastname}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.lastname : ""}
                 onChange={handleChangeModal}
                 width={5}
@@ -78,6 +95,16 @@ function StudentModal() {
                 name='age'
                 type='number'
                 value={modalData != null ? modalData.age : ""}
+                onChange={handleChangeModal}
+                width={2}
+              />
+              <Form.Input
+                label="ID"
+                placeholder="ID"
+                name='id'
+                type='number'
+                error={id}
+                value={modalData != null ? modalData.id : ""}
                 onChange={handleChangeModal}
                 width={2}
               />
@@ -124,8 +151,8 @@ function StudentModal() {
                 options={academicYears}
                 name='year'
                 placeholder='Season'
-                defaultValue={modalData && modalData.seasons[modalData.seasons.length -1]}
                 value={modalData ? modalData.seaons : ''}
+                // defaultValue={modalData == null && modalData.seasons.length === 0  ? '' : modalData.seasons[modalData.seasons.length -1]}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Season"
               />

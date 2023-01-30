@@ -24,7 +24,7 @@ export default function AcademicYears() {
                             Semester
                         </Table.HeaderCell>
                         <Table.HeaderCell>
-                            Classes
+                            Classrooms
                         </Table.HeaderCell>
                         <Table.HeaderCell>
                             Number of Students
@@ -41,7 +41,7 @@ export default function AcademicYears() {
                                     {item.classromCount}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {item.studentCount}
+                                    {item.students.length}
                                 </Table.Cell>
                         </Table.Row>
                     ))}
