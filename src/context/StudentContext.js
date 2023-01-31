@@ -14,49 +14,60 @@ export function StudentProvider({children}) {
     const [checkboxValue, setCheckboxValue] = useState(false)
     const [checkedArray, setCheckedArray] = useState([])
     const [dropDownValue, setDropdownValue] = useState('')
+    const [issubmit, setIsSubmit] = useState(false)
 
-    const [errorState, setErrorState] = useState({
-        name: false,
-        lastname:false,
-        id: false,
-        course: false,
-        level: false,
-        assignedClass: false,
-        debit: false,
-        year: false 
-        
-    }) 
+    const [errorState, setErrorState] = useState({})
+
+    const handleError = (name, text) => {
+        setErrorState((prevState)=>{
+            return{
+                ...prevState,
+                [name]: text
+            }
+        })
+    }
+
+    const handleErrorFalse = (name) => {
+        setErrorState((prevState) => {
+            return{
+                ...prevState,
+                [name] : false
+            }
+        })
+    }
 
     const formValidation = (e) => {
         const {name, value} = e.target
         switch (name) {
             case 'name':
-                if(value.length < 1){
-                    setErrorState((prevState)=>{
-                        return{
-                            ...prevState,
-                            [name]: true
-                        }
-                    })
-                }else{setErrorState((prevState)=>{
-                    return{
-                        ...prevState,
-                        [name]: false
-                    }
-                })}
-
-        
+                if(!value)
+                    handleError(name, 'Name is required')                
+                break;
+            case 'lastname':
+                if(!value)
+                    handleError(name, 'Last Name is required')
+                break;
+            case 'age':
+                if(value < 0){
+                    handleError(name, "Age can't be less than 0")
+                }
+                if(value > 100){
+                    handleError(name, "Max age is 100")
+                }break;
+            case 'id':
+                if(!value)
+                    handleError(name, 'Id is required');
+                break;
+            case 'course':
+                if(!value)
+                    handleError(name, "Course is required")
+                break;
             default:
                 break;
         }
-
-        // setErrorState((prevState)=>{
-        //     return{
-        //         ...prevState,
-        //         [name]: true
-        //     }
-        // })
-        
+        if(errorState.lastname == false){
+            setIsSubmit(true)
+        }
     }
     const handleCheckbox = (evt, data, item) => {       
         const found = checkedArray.some((element)=> {
@@ -130,6 +141,7 @@ export function StudentProvider({children}) {
     //Handle inputs in StudentModal
     const handleChangeModal = (e) => {
         const {name, value} = e.target
+        handleErrorFalse(name)
         setModalData((prevState) => {
             return{
                 ...prevState,
@@ -139,49 +151,53 @@ export function StudentProvider({children}) {
     }
     //Handle StudentModal submit
     const handleSubmit = () => {
-        if(newEntry){
-            setNewEntry(false)
-            //push to all students list
-            studentsList.push(modalData)
-            //push to selected year
-            semesters.forEach((item) => {
-                if(modalData.year === item.year)
-                    item.students.push((modalData))
-            })
+        if(issubmit == false){
+            console.log("NULL")
         }else{
-            semesters.forEach((item) => {
-                //semesters list
-                item.students.forEach((student) => {
+            if(newEntry){
+                setNewEntry(false)
+                //push to all students list
+                studentsList.push(modalData)
+                //push to selected year
+                semesters.forEach((item) => {
+                    if(modalData.year === item.year)
+                        item.students.push((modalData))
+                })
+            }else{
+                semesters.forEach((item) => {
+                    //semesters list
+                    item.students.forEach((student) => {
+                        if(student.id === modalData.id){
+                            if(student !== modalData){
+                                student.name = modalData.name;
+                                student.lastname = modalData.lastname;
+                                student.age = modalData.age;
+                                student.assignedClass = modalData.assignedClass;
+                                student.course = modalData.course;
+                                student.debit = modalData.debit
+                                student.level = modalData.level
+                                student.seasons.push(modalData.year)
+                            }    
+                        }
+                    })
+                })
+                //all students list
+                studentsList.forEach((student) => {
                     if(student.id === modalData.id){
-                        if(student !== modalData){
-                            student.name = modalData.name;
-                            student.lastname = modalData.lastname;
-                            student.age = modalData.age;
-                            student.assignedClass = modalData.assignedClass;
-                            student.course = modalData.course;
-                            student.debit = modalData.debit
-                            student.level = modalData.level
-                            student.seasons.push(modalData.year)
-                        }    
+                        student.name = modalData.name;
+                        student.lastname = modalData.lastname;
+                        student.age = modalData.age;
+                        student.assignedClass = modalData.assignedClass;
+                        student.course = modalData.course;
+                        student.debit = modalData.debit
+                        student.level = modalData.level
+                        student.seasons.push(modalData.year)
                     }
                 })
-            })
-            //all students list
-            studentsList.forEach((student) => {
-                if(student.id === modalData.id){
-                    student.name = modalData.name;
-                    student.lastname = modalData.lastname;
-                    student.age = modalData.age;
-                    student.assignedClass = modalData.assignedClass;
-                    student.course = modalData.course;
-                    student.debit = modalData.debit
-                    student.level = modalData.level
-                    student.seasons.push(modalData.year)
-                }
-            })
-            
+                
+            }
+            setModalVisible(false)       
         }
-        setModalVisible(false)       
     }
 
     return (
@@ -198,6 +214,7 @@ export function StudentProvider({children}) {
                 checkedArray,
                 checkboxValue,
                 errorState,
+                issubmit,
                 formValidation,
                 setCheckboxValue,
                 handleCheckbox,

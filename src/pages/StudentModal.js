@@ -13,13 +13,15 @@ function StudentModal() {
     handleSubmit,
     handleChangeSelector,
     errorState,
-    formValidation
+    formValidation,
+    issubmit
   } = useContext(StudentContext)
 
   const 
     {
       name,
       lastname,
+      age,
       course,
       level,
       assignedClass,
@@ -94,6 +96,8 @@ function StudentModal() {
                 placeholder="Age"
                 name='age'
                 type='number'
+                onBlur={formValidation}
+                error={age}
                 value={modalData != null ? modalData.age : ""}
                 onChange={handleChangeModal}
                 width={2}
@@ -104,6 +108,7 @@ function StudentModal() {
                 name='id'
                 type='number'
                 error={id}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.id : ""}
                 onChange={handleChangeModal}
                 width={2}
@@ -115,6 +120,8 @@ function StudentModal() {
                 placeholder='Course'
                 options={courses}
                 value={modalData != null ? modalData.course : ""}
+                error={course}
+                onBlur={formValidation}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Course"
               />
@@ -175,6 +182,7 @@ function StudentModal() {
           type='submit'
           labelPosition='right'
           icon='checkmark'
+          disabled={!issubmit}
           onClick={handleSubmit}
           positive
         />
