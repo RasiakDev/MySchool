@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { Button, Image, Modal, Form, Icon} from 'semantic-ui-react'
+import { Button, Image, Modal, Form, Icon, Message} from 'semantic-ui-react'
 import {StudentContext} from '../context/StudentContext'
 import { monday } from '../data/scheduleData'
 
@@ -14,7 +14,9 @@ function StudentModal() {
     handleChangeSelector,
     errorState,
     formValidation,
-    issubmit
+    succesErrorText,
+    issubmit,
+    setIsSubmit
   } = useContext(StudentContext)
 
   const 
@@ -59,16 +61,41 @@ function StudentModal() {
 
   return (
     <Modal
-      onClose={() => handleUserModal(false)}
+      onClose={() => {handleUserModal(false)}}
       onOpen={() => handleUserModal(true)}
       open={modalVisible}
     >
-      <Modal.Header>{modalData ? modalData.name + ' ' + modalData.lastname : ''}</Modal.Header>
+      <Modal.Header>
+        {/* Succes Message */}
+        {succesErrorText && issubmit &&<Message icon success >
+          <Icon name='check'/>
+          <Message.Header>{succesErrorText}</Message.Header>
+        </Message>}
+        {/* Error Message */}
+        {succesErrorText && !issubmit &&<Message error>          
+          <Message.Header>{succesErrorText}</Message.Header>
+          <Message.Content><p>Name, Last Name and Id are required</p></Message.Content>
+        </Message>}
+        {/* {modalData ? modalData.name + ' ' + modalData.lastname : ''} */}
+        {modalData && modalData.name !== undefined && modalData.name + '  '}
+        {modalData && modalData.lastname !== undefined && modalData.lastname}
+        </Modal.Header>
       <Modal.Content image>
         <Image size='small' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
         <Modal.Description style={{width: '100%'}}>
           <Form onSubmit={handleSubmit} style={{width: '100%'}}>
             <Form.Group>
+            <Form.Input
+                label="ID"
+                placeholder="ID"
+                name='id'
+                type='number'
+                error={id}
+                onBlur={formValidation}
+                value={modalData != null ? modalData.id : ""}
+                onChange={handleChangeModal}
+                width={2}
+              />
               <Form.Input
                 label="First Name"
                 placeholder="Name"
@@ -99,17 +126,6 @@ function StudentModal() {
                 onBlur={formValidation}
                 error={age}
                 value={modalData != null ? modalData.age : ""}
-                onChange={handleChangeModal}
-                width={2}
-              />
-              <Form.Input
-                label="ID"
-                placeholder="ID"
-                name='id'
-                type='number'
-                error={id}
-                onBlur={formValidation}
-                value={modalData != null ? modalData.id : ""}
                 onChange={handleChangeModal}
                 width={2}
               />
@@ -182,7 +198,7 @@ function StudentModal() {
           type='submit'
           labelPosition='right'
           icon='checkmark'
-          disabled={!issubmit}
+          // disabled={!issubmit}
           onClick={handleSubmit}
           positive
         />

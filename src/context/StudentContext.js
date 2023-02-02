@@ -7,7 +7,6 @@ export const StudentContext = createContext()
 export function StudentProvider({children}) {
 
     const [modalVisible, setModalVisible] = useState(null)
-    const [modalData, setModalData] = useState(null)
     const [newEntry, setNewEntry]  = useState(false)
     const [tableData, setTableData] = useState(studentsList)
     const [selectCheckBox, setSelectCheckbox] = useState(false)
@@ -15,8 +14,16 @@ export function StudentProvider({children}) {
     const [checkedArray, setCheckedArray] = useState([])
     const [dropDownValue, setDropdownValue] = useState('')
     const [issubmit, setIsSubmit] = useState(false)
+    const [succesErrorText, setSuccesErrorText] = useState()
+    const [modalData, setModalData] = useState({
+        name: '',
+        lastname: '',
+        id: 0,
+    })
 
-    const [errorState, setErrorState] = useState({})
+    const [errorState, setErrorState] = useState({
+
+    })
 
     const handleError = (name, text) => {
         setErrorState((prevState)=>{
@@ -65,8 +72,24 @@ export function StudentProvider({children}) {
             default:
                 break;
         }
-        if(errorState.lastname == false){
+        if(errorState.lastname == false && errorState.name == false){
             setIsSubmit(true)
+        }else{
+            setIsSubmit(false)
+        }
+    }
+
+    const submitValidation = () => {
+        if(modalData.name.length === 0){
+            handleError('name', 'Name is required')
+        }
+    
+        if(modalData.lastname.length === 0){
+            handleError('lastname', 'Lastname is required')
+        }
+    
+        if(modalData.id.length === 0){
+            handleError('id', 'ID is required')
         }
     }
     const handleCheckbox = (evt, data, item) => {       
@@ -124,6 +147,8 @@ export function StudentProvider({children}) {
     const handleUserModal = (visible, item) => {
         setModalData(item)
         setModalVisible(visible)
+        if(!visible)
+            setSuccesErrorText()
         if(!item){
             setNewEntry(true)
         }
@@ -141,6 +166,7 @@ export function StudentProvider({children}) {
     //Handle inputs in StudentModal
     const handleChangeModal = (e) => {
         const {name, value} = e.target
+        setIsSubmit(false)
         handleErrorFalse(name)
         setModalData((prevState) => {
             return{
@@ -148,12 +174,12 @@ export function StudentProvider({children}) {
                 [name] : value
             }
         })
+        
     }
     //Handle StudentModal submit
     const handleSubmit = () => {
-        if(issubmit == false){
-            console.log("NULL")
-        }else{
+        if(issubmit && modalData.name.length !== 0 && modalData.lastname.length !== 0 && modalData.id.length !== 0){
+            setSuccesErrorText("Student Added")
             if(newEntry){
                 setNewEntry(false)
                 //push to all students list
@@ -193,10 +219,16 @@ export function StudentProvider({children}) {
                         student.level = modalData.level
                         student.seasons.push(modalData.year)
                     }
-                })
-                
+                })                
             }
-            setModalVisible(false)       
+            setTimeout(() => {
+                setModalVisible(false)
+                setSuccesErrorText()
+                setIsSubmit(false)
+
+            }, 1000)
+        }else{
+            setSuccesErrorText("Please Fill Required Fields")
         }
     }
 
@@ -215,6 +247,9 @@ export function StudentProvider({children}) {
                 checkboxValue,
                 errorState,
                 issubmit,
+                succesErrorText,
+                setSuccesErrorText,
+                setIsSubmit,
                 formValidation,
                 setCheckboxValue,
                 handleCheckbox,

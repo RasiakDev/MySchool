@@ -4,7 +4,6 @@ import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
-import { SemestersContext } from '../context/SemestersContext'
 
 export default function StudentsTable() {
   const {
@@ -13,8 +12,6 @@ export default function StudentsTable() {
     tableData,
     state,
     dispatch,
-    setCheckboxValue,
-    checkBoxValue,
     handleCheckbox,
     selectCheckBox,
     setSelectCheckbox
