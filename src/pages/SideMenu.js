@@ -64,7 +64,7 @@ function SideMenu({children}) {
                 
             </Sidebar>
             
-            <Sidebar.Pusher style={{width: width, paddingLeft: 60, paddingRight: 60, paddingTop: 30,display: 'flex', justifyContent:'center', overflowY: 'scroll'}}  >
+            <Sidebar.Pusher style={{width: '90%', paddingLeft: 60, paddingRight: 60, paddingTop: 30, display: 'flex', justifyContent:'center', overflowY: 'scroll'}}  >
                 
 
                 {!visible && (

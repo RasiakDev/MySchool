@@ -15,8 +15,7 @@ function StudentModal() {
     errorState,
     formValidation,
     succesErrorText,
-    issubmit,
-    setIsSubmit
+    isSuccess
   } = useContext(StudentContext)
 
   const 
@@ -61,18 +60,18 @@ function StudentModal() {
 
   return (
     <Modal
-      onClose={() => {handleUserModal(false)}}
+      onClose={() => handleUserModal(false)}
       onOpen={() => handleUserModal(true)}
       open={modalVisible}
     >
       <Modal.Header>
         {/* Succes Message */}
-        {succesErrorText && issubmit &&<Message icon success >
+        {succesErrorText && isSuccess &&<Message icon success >
           <Icon name='check'/>
           <Message.Header>{succesErrorText}</Message.Header>
         </Message>}
         {/* Error Message */}
-        {succesErrorText && !issubmit &&<Message error>          
+        {succesErrorText && !isSuccess &&<Message error>          
           <Message.Header>{succesErrorText}</Message.Header>
           <Message.Content><p>Name, Last Name and Id are required</p></Message.Content>
         </Message>}

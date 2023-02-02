@@ -15,6 +15,7 @@ export function StudentProvider({children}) {
     const [dropDownValue, setDropdownValue] = useState('')
     const [issubmit, setIsSubmit] = useState(false)
     const [succesErrorText, setSuccesErrorText] = useState()
+    const [isSuccess, setIsSuccess] = useState(false)
     const [modalData, setModalData] = useState({
         name: '',
         lastname: '',
@@ -221,13 +222,15 @@ export function StudentProvider({children}) {
                     }
                 })                
             }
+            setIsSuccess(true)
+            setIsSubmit(false)
             setTimeout(() => {
                 setModalVisible(false)
                 setSuccesErrorText()
-                setIsSubmit(false)
 
             }, 1000)
         }else{
+            setIsSuccess(false)
             setSuccesErrorText("Please Fill Required Fields")
         }
     }
@@ -235,7 +238,6 @@ export function StudentProvider({children}) {
     return (
         <StudentContext.Provider 
             value={{
-                studentsList, 
                 semesters,
                 dropDownValue,
                 modalVisible,
@@ -248,7 +250,9 @@ export function StudentProvider({children}) {
                 errorState,
                 issubmit,
                 succesErrorText,
+                isSuccess,
                 setSuccesErrorText,
+                setErrorState,
                 setIsSubmit,
                 formValidation,
                 setCheckboxValue,
