@@ -27,7 +27,8 @@ function StudentModal() {
       level,
       assignedClass,
       id,
-      year
+      year,
+      debit
     } = errorState
 
   const courses = [
@@ -75,7 +76,6 @@ function StudentModal() {
           <Message.Header>{succesErrorText}</Message.Header>
           <Message.Content><p>Name, Last Name and Id are required</p></Message.Content>
         </Message>}
-        {/* {modalData ? modalData.name + ' ' + modalData.lastname : ''} */}
         {modalData && modalData.name !== undefined && modalData.name + '  '}
         {modalData && modalData.lastname !== undefined && modalData.lastname}
         </Modal.Header>
@@ -144,6 +144,8 @@ function StudentModal() {
                 options={levels}
                 name='level'
                 placeholder="Level"
+                error={level}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.level : ""}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Level"
@@ -152,6 +154,8 @@ function StudentModal() {
                 options={classroomData}
                 name='assignedClass'
                 placeholder='Classroom'
+                error={assignedClass}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.assignedClass : ""}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Classroom"
@@ -163,6 +167,8 @@ function StudentModal() {
                 name="debit"
                 type="number"
                 placeholder={0}
+                error={debit}
+                onBlur={formValidation}
                 value={modalData != null ? modalData.debit : ""}
                 onChange={handleChangeModal}
                 icon={<Icon name='euro sign' />}
@@ -174,7 +180,8 @@ function StudentModal() {
                 name='year'
                 placeholder='Season'
                 value={modalData ? modalData.seaons : ''}
-                // defaultValue={modalData == null && modalData.seasons.length === 0  ? '' : modalData.seasons[modalData.seasons.length -1]}
+                error={year}
+                onBlur={formValidation}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Season"
               />
@@ -197,7 +204,6 @@ function StudentModal() {
           type='submit'
           labelPosition='right'
           icon='checkmark'
-          // disabled={!issubmit}
           onClick={handleSubmit}
           positive
         />

@@ -20,11 +20,14 @@ export function StudentProvider({children}) {
         name: '',
         lastname: '',
         id: 0,
+        age: 0,
+        course: '',
+        level: '',
+        assignedClass: '',
+        debit: 0,
     })
 
-    const [errorState, setErrorState] = useState({
-
-    })
+    const [errorState, setErrorState] = useState({})
 
     const handleError = (name, text) => {
         setErrorState((prevState)=>{
@@ -35,7 +38,7 @@ export function StudentProvider({children}) {
         })
     }
 
-    const handleErrorFalse = (name) => {
+    const setErrorFalse = (name) => {
         setErrorState((prevState) => {
             return{
                 ...prevState,
@@ -49,19 +52,20 @@ export function StudentProvider({children}) {
         switch (name) {
             case 'name':
                 if(!value)
-                    handleError(name, 'Name is required')                
+                    handleError(name, 'Name is required')
+                if(value.length >= 25)
+                    handleError(name, 'Max 25 characters')
                 break;
             case 'lastname':
                 if(!value)
                     handleError(name, 'Last Name is required')
+                if(value.length >= 25)
+                    handleError(name, 'Max 25 characters')
                 break;
             case 'age':
-                if(value < 0){
-                    handleError(name, "Age can't be less than 0")
-                }
-                if(value > 100){
-                    handleError(name, "Max age is 100")
-                }break;
+                if(value < 0 || value > 100)
+                    handleError(name, "Age can be from 0 to 100")                
+                break;
             case 'id':
                 if(!value)
                     handleError(name, 'Id is required');
@@ -70,6 +74,9 @@ export function StudentProvider({children}) {
                 if(!value)
                     handleError(name, "Course is required")
                 break;
+            case 'level':
+                if(!value)
+                    handleError(name, "Level is Required")
             default:
                 break;
         }
@@ -80,19 +87,6 @@ export function StudentProvider({children}) {
         }
     }
 
-    const submitValidation = () => {
-        if(modalData.name.length === 0){
-            handleError('name', 'Name is required')
-        }
-    
-        if(modalData.lastname.length === 0){
-            handleError('lastname', 'Lastname is required')
-        }
-    
-        if(modalData.id.length === 0){
-            handleError('id', 'ID is required')
-        }
-    }
     const handleCheckbox = (evt, data, item) => {       
         const found = checkedArray.some((element)=> {
             return item.id == element.id
@@ -146,6 +140,7 @@ export function StudentProvider({children}) {
     }
     //Set modal visible, get the input to be updated or check if input is empty to add new student
     const handleUserModal = (visible, item) => {
+        setErrorState({})
         setModalData(item)
         setModalVisible(visible)
         if(!visible)
@@ -157,6 +152,8 @@ export function StudentProvider({children}) {
     //Handle selector inputs StudentModal
     const handleChangeSelector = (e, data) => {
         const {name,value} = data
+        setIsSubmit(false)
+        setErrorFalse(name)
         setModalData((prevState) => {
             return{
                 ...prevState,
@@ -168,7 +165,7 @@ export function StudentProvider({children}) {
     const handleChangeModal = (e) => {
         const {name, value} = e.target
         setIsSubmit(false)
-        handleErrorFalse(name)
+        setErrorFalse(name)
         setModalData((prevState) => {
             return{
                 ...prevState,
@@ -179,8 +176,19 @@ export function StudentProvider({children}) {
     }
     //Handle StudentModal submit
     const handleSubmit = () => {
-        if(issubmit && modalData.name.length !== 0 && modalData.lastname.length !== 0 && modalData.id.length !== 0){
+        //if true submit
+        if(issubmit
+            && modalData.name.length !== 0
+            && modalData.lastname.length !== 0
+            && modalData.id.length !== 0
+            && modalData.course.length !== 0
+            && modalData.level.length !== 0
+            && modalData.assignedClass.length !== 0
+            && modalData.debit.length !== 0
+            && modalData.year.length !== 0
+            ){
             setSuccesErrorText("Student Added")
+            //if student doesn't exist
             if(newEntry){
                 setNewEntry(false)
                 //push to all students list
@@ -190,9 +198,9 @@ export function StudentProvider({children}) {
                     if(modalData.year === item.year)
                         item.students.push((modalData))
                 })
-            }else{
+            }else{ //if students exist update
                 semesters.forEach((item) => {
-                    //semesters list
+                    //update in semesters list
                     item.students.forEach((student) => {
                         if(student.id === modalData.id){
                             if(student !== modalData){
@@ -208,7 +216,7 @@ export function StudentProvider({children}) {
                         }
                     })
                 })
-                //all students list
+                //update in all students list
                 studentsList.forEach((student) => {
                     if(student.id === modalData.id){
                         student.name = modalData.name;
@@ -229,9 +237,42 @@ export function StudentProvider({children}) {
                 setSuccesErrorText()
 
             }, 1000)
-        }else{
+        }else if(modalData === null || modalData === undefined){
             setIsSuccess(false)
             setSuccesErrorText("Please Fill Required Fields")
+            setErrorState({
+                name: true,
+                lastname: true,
+                id: true,
+                course: true,
+                level: true,
+                assignedClass: true,
+                debit: true,
+                year: true,
+                age: true
+            })
+        }
+        else{
+            if(modalData.name === undefined || modalData.name === null)
+                handleError('name', 'Name is Reqiured')
+            if(modalData.lastname === undefined || modalData.lastname === null)
+                handleError('lastname', 'Last Name is Required')
+            if(modalData.id === undefined || modalData.id === null)
+                handleError('id', 'Id is Required')
+            if(modalData.course === undefined || modalData.course === null)
+                handleError('course', 'Course is Required')
+            if(modalData.level === undefined || modalData.level === null)
+                handleError('level', 'Level is Required')
+            if(modalData.assignedClass === undefined || modalData.assignedClass === null)
+                handleError('assignedClass', 'Classroom is  ')
+            if(modalData.debit === undefined || modalData.debit === null)
+                handleError('debit', 'Please insert Ammount')
+            if(modalData.year === undefined || modalData.year === null)
+                handleError('year', 'Season is Required')
+            if(modalData.age === undefined || modalData.age === null)
+                handleError('age', 'Age is Required')
+            setIsSuccess(false)
+            setSuccesErrorText("Please Fill Required Fields")            
         }
     }
 
