@@ -16,18 +16,28 @@ export function StudentProvider({children}) {
     const [issubmit, setIsSubmit] = useState(false)
     const [succesErrorText, setSuccesErrorText] = useState()
     const [isSuccess, setIsSuccess] = useState(false)
+    const [isBusy, setIsBusy] = useState(false)
     const [modalData, setModalData] = useState({
-        name: '',
-        lastname: '',
-        id: 0,
-        age: 0,
-        course: '',
-        level: '',
-        assignedClass: '',
-        debit: 0,
+        // name: '',
+        // lastname: '',
+        // id: 0,
+        // age: 0,
+        // course: '',
+        // level: '',
+        // assignedClass: '',
+        // debit: 0,
     })
 
+  
     const [errorState, setErrorState] = useState({})
+
+    const checkIfExists = (name, val) => {
+        studentsList.forEach((item) => {
+            if(val == item.id)
+                handleError(name, "Id is busy")
+                setIsBusy(true)
+        })
+    }
 
     const handleError = (name, text) => {
         setErrorState((prevState)=>{
@@ -50,6 +60,13 @@ export function StudentProvider({children}) {
     const formValidation = (e) => {
         const {name, value} = e.target
         switch (name) {
+            case 'id':
+                if(!value)
+                    handleError(name, 'Id is required');
+                if(value <0 || isNaN(value))
+                    handleError(name, 'Id not correct')
+                checkIfExists(name, value)
+                break;
             case 'name':
                 if(!value)
                     handleError(name, 'Name is required')
@@ -63,12 +80,10 @@ export function StudentProvider({children}) {
                     handleError(name, 'Max 25 characters')
                 break;
             case 'age':
+                if(!value || isNaN(value))
+                    handleError(name, 'Age is required')
                 if(value < 0 || value > 100)
-                    handleError(name, "Age can be from 0 to 100")                
-                break;
-            case 'id':
-                if(!value)
-                    handleError(name, 'Id is required');
+                    handleError(name, "Age can be from 0 to 100")
                 break;
             case 'course':
                 if(!value)
@@ -77,6 +92,9 @@ export function StudentProvider({children}) {
             case 'level':
                 if(!value)
                     handleError(name, "Level is Required")
+            case 'debit':
+                if(!value || isNaN(value))
+                    handleError(name, "Insert Ammount")
             default:
                 break;
         }
@@ -166,26 +184,49 @@ export function StudentProvider({children}) {
         const {name, value} = e.target
         setIsSubmit(false)
         setErrorFalse(name)
-        setModalData((prevState) => {
-            return{
-                ...prevState,
-                [name] : value
-            }
+        setModalData((prevState) => {           
+                return{
+                    ...prevState,
+                    [name] : value
+                }            
         })
         
+    }
+
+    //Handle int inputs
+    const handleIntInputs = (e) => {
+        const {name, value} = e.target
+        setIsSubmit(false)
+        setErrorFalse(name)
+        setModalData((prevState) => {           
+                return{
+                    ...prevState,
+                    [name] : parseInt(value)
+                }            
+        })
     }
     //Handle StudentModal submit
     const handleSubmit = () => {
         //if true submit
-        if(issubmit
-            && modalData.name.length !== 0
-            && modalData.lastname.length !== 0
-            && modalData.id.length !== 0
-            && modalData.course.length !== 0
-            && modalData.level.length !== 0
-            && modalData.assignedClass.length !== 0
-            && modalData.debit.length !== 0
-            && modalData.year.length !== 0
+        if(
+            errorState.id == false
+            && errorState.name == false
+            && errorState.lastname == false
+            && errorState.course == false
+            && errorState.level == false
+            && errorState.assignedClass == false
+            && errorState.debit == false
+            && errorState.year == false
+            && errorState.age == false
+            // issubmit
+            // && modalData.name.length !== 0
+            // && modalData.lastname.length !== 0
+            // && modalData.id.length !== 0
+            // && modalData.course.length !== 0
+            // && modalData.level.length !== 0
+            // && modalData.assignedClass.length !== 0
+            // && modalData.debit.length !== 0
+            // && modalData.year.length !== 0
             ){
             setSuccesErrorText("Student Added")
             //if student doesn't exist
@@ -198,6 +239,7 @@ export function StudentProvider({children}) {
                     if(modalData.year === item.year)
                         item.students.push((modalData))
                 })
+                setModalData({})
             }else{ //if students exist update
                 semesters.forEach((item) => {
                     //update in semesters list
@@ -228,10 +270,12 @@ export function StudentProvider({children}) {
                         student.level = modalData.level
                         student.seasons.push(modalData.year)
                     }
-                })                
+                })
+                setModalData({})               
             }
             setIsSuccess(true)
             setIsSubmit(false)
+            setModalData({})
             setTimeout(() => {
                 setModalVisible(false)
                 setSuccesErrorText()
@@ -241,34 +285,34 @@ export function StudentProvider({children}) {
             setIsSuccess(false)
             setSuccesErrorText("Please Fill Required Fields")
             setErrorState({
+                id: true,
                 name: true,
                 lastname: true,
-                id: true,
+                age: true,
                 course: true,
                 level: true,
                 assignedClass: true,
                 debit: true,
-                year: true,
-                age: true
+                year: true
             })
         }
         else{
+            if(modalData.id === undefined || modalData.id === null)
+                handleError('id', 'Id is Required')
             if(modalData.name === undefined || modalData.name === null)
                 handleError('name', 'Name is Reqiured')
             if(modalData.lastname === undefined || modalData.lastname === null)
                 handleError('lastname', 'Last Name is Required')
-            if(modalData.id === undefined || modalData.id === null)
-                handleError('id', 'Id is Required')
             if(modalData.course === undefined || modalData.course === null)
                 handleError('course', 'Course is Required')
             if(modalData.level === undefined || modalData.level === null)
                 handleError('level', 'Level is Required')
             if(modalData.assignedClass === undefined || modalData.assignedClass === null)
-                handleError('assignedClass', 'Classroom is  ')
+                handleError('assignedClass', 'Classroom is Required')
             if(modalData.debit === undefined || modalData.debit === null)
                 handleError('debit', 'Please insert Ammount')
             if(modalData.year === undefined || modalData.year === null)
-                handleError('year', 'Season is Required')
+                handleError('year', 'req')
             if(modalData.age === undefined || modalData.age === null)
                 handleError('age', 'Age is Required')
             setIsSuccess(false)
@@ -292,6 +336,7 @@ export function StudentProvider({children}) {
                 issubmit,
                 succesErrorText,
                 isSuccess,
+                handleIntInputs,
                 setSuccesErrorText,
                 setErrorState,
                 setIsSubmit,

@@ -15,7 +15,9 @@ function StudentModal() {
     errorState,
     formValidation,
     succesErrorText,
-    isSuccess
+    isSuccess,
+    handleIntInputs,
+    studentsList
   } = useContext(StudentContext)
 
   const 
@@ -30,6 +32,7 @@ function StudentModal() {
       year,
       debit
     } = errorState
+
 
   const courses = [
     {key: 'en', text: 'English', value: 'English'},
@@ -74,7 +77,6 @@ function StudentModal() {
         {/* Error Message */}
         {succesErrorText && !isSuccess &&<Message error>          
           <Message.Header>{succesErrorText}</Message.Header>
-          <Message.Content><p>Name, Last Name and Id are required</p></Message.Content>
         </Message>}
         {modalData && modalData.name !== undefined && modalData.name + '  '}
         {modalData && modalData.lastname !== undefined && modalData.lastname}
@@ -91,8 +93,9 @@ function StudentModal() {
                 type='number'
                 error={id}
                 onBlur={formValidation}
-                value={modalData != null ? modalData.id : ""}
-                onChange={handleChangeModal}
+                // defaultValue={studentsList.length + 1}
+                value={modalData && modalData.id}
+                onChange={handleIntInputs}
                 width={2}
               />
               <Form.Input
@@ -125,7 +128,7 @@ function StudentModal() {
                 onBlur={formValidation}
                 error={age}
                 value={modalData != null ? modalData.age : ""}
-                onChange={handleChangeModal}
+                onChange={handleIntInputs}
                 width={2}
               />
             </Form.Group>
@@ -170,7 +173,7 @@ function StudentModal() {
                 error={debit}
                 onBlur={formValidation}
                 value={modalData != null ? modalData.debit : ""}
-                onChange={handleChangeModal}
+                onChange={handleIntInputs}
                 icon={<Icon name='euro sign' />}
                 width={3}
               >
