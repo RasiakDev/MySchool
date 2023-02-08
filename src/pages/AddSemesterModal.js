@@ -3,13 +3,15 @@ import { Button, Modal, Input, Checkbox } from 'semantic-ui-react'
 import StudentsTable from '../components/StudentsTable'
 import { SemestersContext } from '../context/SemestersContext'
 import { StudentContext } from '../context/StudentContext'
+
 export default function AddNewSemester() {
     const {
         modalVisible,
         setModalVisible,
         addNewSeason,
         handleChange,
-        inputValue,
+        errorState,
+        validation
     } = useContext(SemestersContext)
     
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
@@ -24,7 +26,7 @@ export default function AddNewSemester() {
             onClose={() => setModalVisible(false)}
         >
             <Modal.Header>
-                <Input name='year' onChange={handleChange} label="Season Name"></Input>
+                <Input name='year' onBlur={validation} error={errorState.year} onChange={handleChange} label="Season Name"></Input>
             </Modal.Header>
             <Modal.Content scrolling>
                 <Modal.Description>
@@ -32,7 +34,7 @@ export default function AddNewSemester() {
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions>
-                <Button type='submit' onClick={addNewSeason}>Click</Button>
+                <Button positive type='submit' onClick={addNewSeason}>Save</Button>
             </Modal.Actions>
         </Modal>
     )

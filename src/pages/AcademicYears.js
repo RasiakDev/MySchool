@@ -1,9 +1,9 @@
 import React, {useContext} from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import { StudentContext } from '../context/StudentContext'
-import SemestersModal from './SemestersModal'
 import { SemestersContext } from '../context/SemestersContext'
-
+import AddNewSemesterModal from './AddSemesterModal'
+import ViewSemesterModal from './ViewSemesterModal'
 export default function AcademicYears() {
     const {semesters} = useContext(StudentContext)
     const {setModalVisible} = useContext(SemestersContext)
@@ -14,7 +14,8 @@ export default function AcademicYears() {
 
     return (
         <>
-        <SemestersModal/>
+        <AddNewSemesterModal/>
+        <ViewSemesterModal/>
         <div style={{width: '70%'}}>
             <Button onClick={addNewSemester}>Add new Semester</Button>
             <Table selectable >

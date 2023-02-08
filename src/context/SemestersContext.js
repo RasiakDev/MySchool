@@ -9,15 +9,34 @@ export function SemestersProvider({children}) {
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
 
     const [modalVisible, setModalVisible] = useState(false)
+    const [errorState, setErrorState] = useState({
+        
+    })
     const [inputValue, setInputValue] = useState([{
-        year: '',
-        students: [],
-        classrooms: [],
+        // year: '',
+        // students: [],
+        // classrooms: [],
     }])
+    const {year, students, classrooms} = inputValue
 
+    const validation = (e) => {
+        const {name, value} = e.target
+        if(!value)
+            handleErrorState(name, false)
+    }
+
+    const handleErrorState = (name, value) => {
+        setErrorState((prevState) => {
+            return{
+                ...prevState,
+                [name]: value
+            }
+        })
+    }
     // handle Semester name input 
    const handleChange = (e) => {
        const {name, value} = e.target
+       handleErrorState(name, false)
        setInputValue((prevState) => {
            return{
                ...prevState,
@@ -29,17 +48,25 @@ export function SemestersProvider({children}) {
 
     //submit new season
     const addNewSeason = () => {
-        semesters.push(inputValue)
-        setModalVisible(false)
-        setCheckedArray([])
-        console.log(semesters)
+        if(inputValue.year === undefined || inputValue.year === null){
+            handleErrorState('year', true)
+        }
+        else if(inputValue.year.length !== 0){
+            semesters.push(inputValue)
+            setModalVisible(false)
+            setInputValue({})
+            setCheckedArray([])
+        }else{
+            handleErrorState('year', true)
+        }
     }
 
     return (
         <SemestersContext.Provider 
             value={{
                 modalVisible,
-                inputValue,
+                errorState,
+                validation,
                 setModalVisible,
                 handleChange,
                 addNewSeason

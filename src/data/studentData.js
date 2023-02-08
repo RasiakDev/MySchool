@@ -75,6 +75,47 @@ export const semesters =
 [
     {
         year : '2022 - 2023',
+        classRooms: [
+            {
+                id: 1,
+                name: "Anglisht B1 Junior",
+                teacher: 'Brisejda',
+                students: [
+                    {
+                        "id": 1,
+                        'name': 'Besmir',
+                        'lastname': 'Guma',
+                        'age': 27,
+                        'course': 'English',
+                        'level': 'B2',
+                        'assignedClass': 'Anglisht B1 Etoni',
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 3,
+                        'name': 'Gezim',
+                        'lastname': 'Hovi',
+                        'age': 28,
+                        'course': 'Italian',
+                        'level': 'A2',
+                        'assignedClass': 'B1 Adult',
+                        'debit': 300,
+                        'seasons': ['2022 - 2023']
+                    },       
+                    {
+                        "id": 4,
+                        'name': 'Antuen',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                ]
+            }
+        ],
         students : [
             {
                 "id": 1,

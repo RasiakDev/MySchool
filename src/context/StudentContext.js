@@ -29,8 +29,12 @@ export function StudentProvider({children}) {
     })
 
   
-    const [errorState, setErrorState] = useState({})
-
+    const [errorState, setErrorState] = useState({
+        name: false,
+        lastname: false,
+        age: false
+    })
+    const {name, lastname, age} = errorState
     const checkIfExists = (name, val) => {
         studentsList.forEach((item) => {
             if(val == item.id)
@@ -48,11 +52,11 @@ export function StudentProvider({children}) {
         })
     }
 
-    const setErrorFalse = (name) => {
+    const setErrorFalse = (item) => {
         setErrorState((prevState) => {
             return{
                 ...prevState,
-                [name] : false
+                [item] : false
             }
         })
     }
@@ -105,7 +109,7 @@ export function StudentProvider({children}) {
         }
     }
 
-    const handleCheckbox = (evt, data, item) => {       
+    const handleCheckbox = (evt, data, item) => {
         const found = checkedArray.some((element)=> {
             return item.id == element.id
         })
@@ -121,13 +125,13 @@ export function StudentProvider({children}) {
     //show table data by year or all students list
     const updateTableData = (e, data) => {
         if(data === undefined || data === null){
-            setTableData(studentsList)       
-            setDropdownValue('')    
+            setTableData(studentsList)
+            setDropdownValue('')
         }
         else{
             setTableData(data)
             setDropdownValue(e)
-        }        
+        }
     }
 
     //Filter the students table
@@ -136,7 +140,7 @@ export function StudentProvider({children}) {
         data: tableData,
         direction: null,
       })
-    function filterReducer(state, action) {    
+    function filterReducer(state, action) {
         switch (action.type) {
           case 'CHANGE_SORT':
             if (state.column === action.column) {
@@ -163,6 +167,7 @@ export function StudentProvider({children}) {
         setModalVisible(visible)
         if(!visible)
             setSuccesErrorText()
+            setNewEntry(false)
         if(!item){
             setNewEntry(true)
         }
@@ -185,12 +190,11 @@ export function StudentProvider({children}) {
         setIsSubmit(false)
         setErrorFalse(name)
         setModalData((prevState) => {           
-                return{
-                    ...prevState,
-                    [name] : value
-                }            
-        })
-        
+            return{
+                ...prevState,
+                [name] : value
+            }            
+        })        
     }
 
     //Handle int inputs
@@ -199,68 +203,41 @@ export function StudentProvider({children}) {
         setIsSubmit(false)
         setErrorFalse(name)
         setModalData((prevState) => {           
-                return{
-                    ...prevState,
-                    [name] : parseInt(value)
-                }            
+            return{
+                ...prevState,
+                [name] : parseInt(value)
+            }            
         })
     }
     //Handle StudentModal submit
     const handleSubmit = () => {
-        //if true submit
-        if(
-            errorState.id == false
-            && errorState.name == false
-            && errorState.lastname == false
-            && errorState.course == false
-            && errorState.level == false
-            && errorState.assignedClass == false
-            && errorState.debit == false
-            && errorState.year == false
-            && errorState.age == false
-            // issubmit
-            // && modalData.name.length !== 0
-            // && modalData.lastname.length !== 0
-            // && modalData.id.length !== 0
-            // && modalData.course.length !== 0
-            // && modalData.level.length !== 0
-            // && modalData.assignedClass.length !== 0
-            // && modalData.debit.length !== 0
-            // && modalData.year.length !== 0
-            ){
-            setSuccesErrorText("Student Added")
-            //if student doesn't exist
-            if(newEntry){
-                setNewEntry(false)
-                //push to all students list
-                studentsList.push(modalData)
-                //push to selected year
-                semesters.forEach((item) => {
-                    if(modalData.year === item.year)
-                        item.students.push((modalData))
-                })
-                setModalData({})
-            }else{ //if students exist update
-                semesters.forEach((item) => {
-                    //update in semesters list
-                    item.students.forEach((student) => {
-                        if(student.id === modalData.id){
-                            if(student !== modalData){
-                                student.name = modalData.name;
-                                student.lastname = modalData.lastname;
-                                student.age = modalData.age;
-                                student.assignedClass = modalData.assignedClass;
-                                student.course = modalData.course;
-                                student.debit = modalData.debit
-                                student.level = modalData.level
-                                student.seasons.push(modalData.year)
-                            }    
-                        }
-                    })
-                })
-                //update in all students list
-                studentsList.forEach((student) => {
+        console.log(name, lastname, age)
+        //UPDATE EXISTING STUDENT
+        if(newEntry === false && modalData.name.length !== 0 && modalData.lastname.length !== 0 && modalData.age.length !== 0){
+            //update in semesters list
+            semesters.forEach((item) => {
+                item.students.forEach((student) => {
                     if(student.id === modalData.id){
+                        if(student !== modalData){
+                            student.name = modalData.name;
+                            student.lastname = modalData.lastname;
+                            student.age = modalData.age;
+                            student.assignedClass = modalData.assignedClass;
+                            student.course = modalData.course;
+                            student.debit = modalData.debit
+                            student.level = modalData.level
+                            // student.seasons.push(modalData.year)
+                        }else{
+                            setModalVisible(false);
+                            console.log('nothing changed');
+                        }
+                    }
+                })
+            })
+            //update in all students list
+            studentsList.forEach((student) => {
+                if(student.id === modalData.id){
+                    if(student !== modalData){
                         student.name = modalData.name;
                         student.lastname = modalData.lastname;
                         student.age = modalData.age;
@@ -268,19 +245,55 @@ export function StudentProvider({children}) {
                         student.course = modalData.course;
                         student.debit = modalData.debit
                         student.level = modalData.level
-                        student.seasons.push(modalData.year)
+                        // student.seasons.push(modalData.year)
+                    }else{
+                        setModalVisible(false);
+                        console.log('nothing changed');
                     }
-                })
-                setModalData({})               
-            }
+                }
+            })
+            setIsSuccess(true)
+            setIsSubmit(false)
+            setModalData({})
+            setSuccesErrorText("Student Updated")
+            setTimeout(() => {
+                setModalVisible(false)
+                setSuccesErrorText()
+
+            }, 1000)
+            console.log("not new entry")
+            //NEW REGISTATION
+        }else if(issubmit
+            && newEntry
+            && errorState.id === false
+            && errorState.name === false
+            && errorState.lastname === false
+            && errorState.course === false
+            && errorState.level === false
+            && errorState.assignedClass === false
+            && errorState.debit === false
+            && errorState.year === false
+            && errorState.age === false
+            ){
+            setSuccesErrorText("Student Added")
+            //if student doesn't exist
+            setNewEntry(false)
+            //push to all students list
+            studentsList.push(modalData)
+            //push to selected year
+            semesters.forEach((item) => {
+                if(modalData.year === item.year)
+                    item.students.push((modalData))
+            })
+            setModalData({})
             setIsSuccess(true)
             setIsSubmit(false)
             setModalData({})
             setTimeout(() => {
                 setModalVisible(false)
                 setSuccesErrorText()
-
             }, 1000)
+            console.log("new entry")
         }else if(modalData === null || modalData === undefined){
             setIsSuccess(false)
             setSuccesErrorText("Please Fill Required Fields")
@@ -295,8 +308,8 @@ export function StudentProvider({children}) {
                 debit: true,
                 year: true
             })
-        }
-        else{
+            console.log("All null")
+        }else{
             if(modalData.id === undefined || modalData.id === null)
                 handleError('id', 'Id is Required')
             if(modalData.name === undefined || modalData.name === null)
@@ -309,14 +322,15 @@ export function StudentProvider({children}) {
                 handleError('level', 'Level is Required')
             if(modalData.assignedClass === undefined || modalData.assignedClass === null)
                 handleError('assignedClass', 'Classroom is Required')
-            if(modalData.debit === undefined || modalData.debit === null)
-                handleError('debit', 'Please insert Ammount')
-            if(modalData.year === undefined || modalData.year === null)
-                handleError('year', 'req')
+            // if(modalData.debit === undefined || modalData.debit === null)
+            //     handleError('debit', 'Please insert Ammount')
+            // if(modalData.year === undefined || modalData.year === null)
+            //     handleError('year', 'req')
             if(modalData.age === undefined || modalData.age === null)
                 handleError('age', 'Age is Required')
             setIsSuccess(false)
             setSuccesErrorText("Please Fill Required Fields")            
+            console.log("Last else")
         }
     }
 
@@ -336,6 +350,7 @@ export function StudentProvider({children}) {
                 issubmit,
                 succesErrorText,
                 isSuccess,
+                newEntry,
                 handleIntInputs,
                 setSuccesErrorText,
                 setErrorState,
@@ -357,5 +372,3 @@ export function StudentProvider({children}) {
         </StudentContext.Provider>
     )
 }
-
-

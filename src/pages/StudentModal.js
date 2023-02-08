@@ -17,7 +17,7 @@ function StudentModal() {
     succesErrorText,
     isSuccess,
     handleIntInputs,
-    studentsList
+    newEntry
   } = useContext(StudentContext)
 
   const 
@@ -92,6 +92,7 @@ function StudentModal() {
                 name='id'
                 type='number'
                 error={id}
+                disabled={!newEntry}
                 onBlur={formValidation}
                 // defaultValue={studentsList.length + 1}
                 value={modalData && modalData.id}
@@ -169,12 +170,13 @@ function StudentModal() {
                 label="Debit"
                 name="debit"
                 type="number"
+                disabled={!newEntry}
                 placeholder={0}
                 error={debit}
                 onBlur={formValidation}
                 value={modalData != null ? modalData.debit : ""}
                 onChange={handleIntInputs}
-                icon={<Icon name='euro sign' />}
+                icon={<Icon name='euro sign'/>}
                 width={3}
               >
               </Form.Input>
@@ -184,6 +186,7 @@ function StudentModal() {
                 placeholder='Season'
                 value={modalData ? modalData.seaons : ''}
                 error={year}
+                disabled={!newEntry}
                 onBlur={formValidation}
                 onChange={(e, data) => handleChangeSelector(e, data)}
                 label="Season"
