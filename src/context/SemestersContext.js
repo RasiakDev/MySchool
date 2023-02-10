@@ -7,17 +7,30 @@ export const SemestersContext = createContext()
 export function SemestersProvider({children}) {
 
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
-
-    const [modalVisible, setModalVisible] = useState(false)
-    const [errorState, setErrorState] = useState({
-        
-    })
-    const [inputValue, setInputValue] = useState([{
+    //toggle for AddSemesterModal.js
+    const [addSemesterModal, setAddSemesterModal] = useState(false)
+    //toggle for ViewSemesterModal.js
+    const [viewSemesterModal, setViewSemesterModal] = useState(false)
+    const [selectedYear, setSelectedYear] = useState(semesters[0].classRooms)
+    const [errorState, setErrorState] = useState({})
+    const [inputValue, setInputValue] = useState({
         // year: '',
         // students: [],
         // classrooms: [],
-    }])
+    })
     const {year, students, classrooms} = inputValue
+    //toggle for AddSemesterModal.js
+    const handleAddSemesterModal = (value) => {
+        setAddSemesterModal(value)
+        if(value === false)
+            setErrorState({})
+    }
+    //toggle for ViewSemesterModal.js
+    const handleViewSemesterModal = (data, value) => {
+        console.log(data)
+        setSelectedYear(data)
+        setViewSemesterModal(value)
+    }
 
     const validation = (e) => {
         const {name, value} = e.target
@@ -53,7 +66,7 @@ export function SemestersProvider({children}) {
         }
         else if(inputValue.year.length !== 0){
             semesters.push(inputValue)
-            setModalVisible(false)
+            setAddSemesterModal(false)
             setInputValue({})
             setCheckedArray([])
         }else{
@@ -64,10 +77,13 @@ export function SemestersProvider({children}) {
     return (
         <SemestersContext.Provider 
             value={{
-                modalVisible,
                 errorState,
+                addSemesterModal,
+                viewSemesterModal,
+                selectedYear,
+                handleViewSemesterModal,
+                handleAddSemesterModal,
                 validation,
-                setModalVisible,
                 handleChange,
                 addNewSeason
             }}

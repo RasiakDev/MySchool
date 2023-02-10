@@ -6,8 +6,8 @@ import { StudentContext } from '../context/StudentContext'
 
 export default function AddNewSemester() {
     const {
-        modalVisible,
-        setModalVisible,
+        addSemesterModal,
+        handleAddSemesterModal,
         addNewSeason,
         handleChange,
         errorState,
@@ -21,9 +21,9 @@ export default function AddNewSemester() {
     }
     return (
         <Modal
-            open={modalVisible}
-            onOpen={() => setModalVisible(true)}
-            onClose={() => setModalVisible(false)}
+            open={addSemesterModal}
+            onOpen={() => handleAddSemesterModal(true)}
+            onClose={() => handleAddSemesterModal(false)}
         >
             <Modal.Header>
                 <Input name='year' onBlur={validation} error={errorState.year} onChange={handleChange} label="Season Name"></Input>

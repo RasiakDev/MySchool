@@ -78,7 +78,10 @@ export const semesters =
         classRooms: [
             {
                 id: 1,
-                name: "Anglisht B1 Junior",
+                course: 'English',
+                startingHour: 16,
+                endingHour: 18,
+                name: 'B1 Adult',
                 teacher: 'Brisejda',
                 students: [
                     {
@@ -106,6 +109,48 @@ export const semesters =
                         "id": 4,
                         'name': 'Antuen',
                         'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                ]
+            },
+            {
+                id: 2,
+                course: 'English',
+                startingHour: 13,
+                endingHour: 15,
+                name: 'A2 Junior',
+                teacher: 'Elton',
+                students: [
+                    {
+                        "id": 11,
+                        'name': 'Xhoni',
+                        'lastname': 'Qiriazi',
+                        'age': 27,
+                        'course': 'English',
+                        'level': 'B2',
+                        'assignedClass': 'Anglisht B1 Etoni',
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 13,
+                        'name': 'Klaudio',
+                        'lastname': 'Agolli',
+                        'age': 28,
+                        'course': 'Italian',
+                        'level': 'A2',
+                        'assignedClass': 'B1 Adult',
+                        'debit': 300,
+                        'seasons': ['2022 - 2023']
+                    },       
+                    {
+                        "id": 14,
+                        'name': 'Mirian',
+                        'lastname': 'Shkoza',
                         'age': 18,
                         'course': 'Italian',
                         'level': 'B2',

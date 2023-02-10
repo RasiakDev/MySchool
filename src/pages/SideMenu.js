@@ -58,7 +58,7 @@ function SideMenu({children}) {
                 <Link to={'academic-years'}>
                     <Menu.Item>
                         <Icon name='calendar alternate'/>
-                        Academic Years
+                        Semesters
                     </Menu.Item>
                 </Link>
                 

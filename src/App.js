@@ -7,7 +7,7 @@ import SideMenu from "./pages/SideMenu";
 import { StudentProvider } from "./context/StudentContext";
 import { ScheduleProvider } from "./context/ScheduleContext";
 import { SemestersProvider } from "./context/SemestersContext";
-import AcademicYears from "./pages/AcademicYears";
+import Semesters from "./pages/Semesters";
 function App() {
   return (
     
@@ -22,7 +22,7 @@ function App() {
               <Route path='teachers' element={<Teachers/>}/>
               <Route path='students' element={<Students/>}/>
               <Route path='schedules' element={<Schedules/>}/>
-              <Route path='academic-years' element={<AcademicYears/>}/>
+              <Route path='academic-years' element={<Semesters/>}/>
           </Routes>
         </SideMenu>
       </BrowserRouter>

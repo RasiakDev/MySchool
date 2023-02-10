@@ -6,18 +6,14 @@ import AddNewSemesterModal from './AddSemesterModal'
 import ViewSemesterModal from './ViewSemesterModal'
 export default function AcademicYears() {
     const {semesters} = useContext(StudentContext)
-    const {setModalVisible} = useContext(SemestersContext)
-
-    const addNewSemester = () => {
-        setModalVisible(true)
-    }
+    const {handleAddSemesterModal, handleViewSemesterModal,} = useContext(SemestersContext)
 
     return (
         <>
         <AddNewSemesterModal/>
         <ViewSemesterModal/>
         <div style={{width: '70%'}}>
-            <Button onClick={addNewSemester}>Add new Semester</Button>
+            <Button onClick={() => handleAddSemesterModal(true)}>Add new Semester</Button>
             <Table selectable >
                 <Table.Header>
                     <Table.Row>
@@ -33,8 +29,10 @@ export default function AcademicYears() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {semesters.map((item)=>(
-                        <Table.Row key={item.year}>
+                    {semesters.map((item) => (
+                        <Table.Row 
+                            onClick={() => handleViewSemesterModal(item.classRooms, true)}
+                            key={item.year}>
                             <Table.Cell>
                                 {item.year}
                             </Table.Cell>

@@ -2,12 +2,13 @@ import React, {useContext} from 'react'
 import { Grid, Header, Segment, Table } from 'semantic-ui-react'
 import ScheduleBox from './ScheduleBox'
 import {ScheduleContext} from '../context/ScheduleContext'
+import { SemestersContext } from '../context/SemestersContext'
 
 export default function ScheduleTable() {
 
   const {monday} = useContext(ScheduleContext)
+  const {selectedYear} = useContext(SemestersContext)
 
-  monday.map((item) => console.log(item.id))
   const container = {
     width: '100%',
     height: 200,
@@ -58,9 +59,9 @@ export default function ScheduleTable() {
           </Grid.Row>
           <Grid.Row divided>
             <Grid.Column>
-              {monday.map((item) => (
+              {selectedYear.map((item) => (
               <ScheduleBox
-                lenda={item.class}
+                lenda={item.course}
                 className={item.name}
                 startingHour={item.startingHour}
                 engingHour={item.endingHour}
