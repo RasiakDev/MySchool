@@ -37,7 +37,7 @@ export default function AcademicYears() {
                                 {item.year}
                             </Table.Cell>
                                 <Table.Cell>
-                                    {item.classromCount}
+                                    {item.classRooms.length}
                                 </Table.Cell>
                                 <Table.Cell>
                                     {item.students.length}

@@ -12,11 +12,12 @@ export function SemestersProvider({children}) {
     //toggle for ViewSemesterModal.js
     const [viewSemesterModal, setViewSemesterModal] = useState(false)
     const [selectedYear, setSelectedYear] = useState(semesters[0].classRooms)
+    const [isCurrentSeason, setIsCurrentSeason] = useState(true)
     const [errorState, setErrorState] = useState({})
     const [inputValue, setInputValue] = useState({
-        // year: '',
-        // students: [],
-        // classrooms: [],
+        year: '',
+        students: [],
+        classrooms: [],
     })
     const {year, students, classrooms} = inputValue
     //toggle for AddSemesterModal.js
@@ -81,6 +82,8 @@ export function SemestersProvider({children}) {
                 addSemesterModal,
                 viewSemesterModal,
                 selectedYear,
+                isCurrentSeason,
+                setIsCurrentSeason,
                 handleViewSemesterModal,
                 handleAddSemesterModal,
                 validation,

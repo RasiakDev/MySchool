@@ -1,8 +1,8 @@
 import React,{useState, useContext} from 'react'
-import { Button, Modal, Input, Checkbox } from 'semantic-ui-react'
 import StudentsTable from '../components/StudentsTable'
 import { SemestersContext } from '../context/SemestersContext'
 import { StudentContext } from '../context/StudentContext'
+import { Button, Modal, Input, Checkbox } from 'semantic-ui-react'
 
 export default function AddNewSemester() {
     const {
@@ -11,7 +11,9 @@ export default function AddNewSemester() {
         addNewSeason,
         handleChange,
         errorState,
-        validation
+        validation,
+        isCurrentSeason,
+        setIsCurrentSeason,
     } = useContext(SemestersContext)
     
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
@@ -27,6 +29,7 @@ export default function AddNewSemester() {
         >
             <Modal.Header>
                 <Input name='year' onBlur={validation} error={errorState.year} onChange={handleChange} label="Season Name"></Input>
+                <Checkbox label="Current Season" checked={isCurrentSeason} onChange={() => setIsCurrentSeason((prevState)=> !prevState)} />
             </Modal.Header>
             <Modal.Content scrolling>
                 <Modal.Description>
