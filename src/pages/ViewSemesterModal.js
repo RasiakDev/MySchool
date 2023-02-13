@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
 import ScheduleTable from '../components/ScheduleTable'
-import {Modal} from 'semantic-ui-react'
+import {Button, Modal} from 'semantic-ui-react'
 import { SemestersContext } from '../context/SemestersContext'
+import ViewClassroomModal from './ViewClassroomModal'
 
 export default function ViewSemesterModal() {
     const {
@@ -10,16 +11,22 @@ export default function ViewSemesterModal() {
       selectedYear
     } = useContext(SemestersContext)
   return (
+    <>
     <Modal 
       open={viewSemesterModal}
       onOpen={() => handleViewSemesterModal(true)}
       onClose={() => handleViewSemesterModal(false)}
       size='fullscreen'
     >
-      <Modal.Content style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <h1>2022 - 2023</h1>
-        <ScheduleTable/>
+      <Modal.Header style={{display: 'flex', justifyContent: 'center'}}>
+        <h1>{selectedYear.year}</h1>
+        <Button primary style={{position: 'absolute', right: 20}}>View Students</Button>
+      </Modal.Header>
+      <Modal.Content scrolling style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>          
+        <ScheduleTable selectedYear={selectedYear.classRooms}/>
       </Modal.Content>
     </Modal>
+    <ViewClassroomModal/>
+    </>
   )
 }

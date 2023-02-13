@@ -31,7 +31,7 @@ export default function AcademicYears() {
                 <Table.Body>
                     {semesters.map((item) => (
                         <Table.Row 
-                            onClick={() => handleViewSemesterModal(item.classRooms, true)}
+                            onClick={() => handleViewSemesterModal(item, true)}
                             key={item.year}>
                             <Table.Cell>
                                 {item.year}

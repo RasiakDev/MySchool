@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useState} from 'react'
-import { semesters } from '../data/studentData'
+import React, {createContext, useContext, useEffect, useState} from 'react'
+import { semesters, studentsList } from '../data/studentData'
 import { StudentContext } from './StudentContext'
 
 export const SemestersContext = createContext()
@@ -9,8 +9,20 @@ export function SemestersProvider({children}) {
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
     //toggle for AddSemesterModal.js
     const [addSemesterModal, setAddSemesterModal] = useState(false)
+
     //toggle for ViewSemesterModal.js
     const [viewSemesterModal, setViewSemesterModal] = useState(false)
+    //toggle for ViewClassroomModal.js
+    const [viewClassroomModal, setViewClassroomModal] = useState(false)
+    const [selectedClassroom, setSelectedClassroom] = useState()
+    const [currentSeason, setCurrentSeason] = useState(semesters[0].classRooms)
+    useEffect(()=> {
+        semesters.forEach((item) => {
+            if(item.currentSeason == true){
+                setCurrentSeason(item.classRooms)
+            }
+        })
+    }, [currentSeason])
     const [selectedYear, setSelectedYear] = useState(semesters[0].classRooms)
     const [isCurrentSeason, setIsCurrentSeason] = useState(true)
     const [errorState, setErrorState] = useState({})
@@ -27,10 +39,16 @@ export function SemestersProvider({children}) {
             setErrorState({})
     }
     //toggle for ViewSemesterModal.js
-    const handleViewSemesterModal = (data, value) => {
-        console.log(data)
-        setSelectedYear(data)
+    const handleViewSemesterModal = (selectedYear, value) => {
+        if(value)
+            setSelectedYear(selectedYear)
         setViewSemesterModal(value)
+    }
+    const handleViewClassroomModal = (value, selectedClassroom) => {
+        if(value)
+            setSelectedClassroom(selectedClassroom)
+        setViewClassroomModal(value)
+        console.log(selectedClassroom)
     }
 
     const validation = (e) => {
@@ -81,9 +99,13 @@ export function SemestersProvider({children}) {
                 errorState,
                 addSemesterModal,
                 viewSemesterModal,
+                viewClassroomModal,
                 selectedYear,
+                selectedClassroom,
                 isCurrentSeason,
+                currentSeason,
                 setIsCurrentSeason,
+                handleViewClassroomModal,
                 handleViewSemesterModal,
                 handleAddSemesterModal,
                 validation,

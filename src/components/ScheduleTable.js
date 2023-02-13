@@ -4,9 +4,9 @@ import ScheduleBox from './ScheduleBox'
 import {ScheduleContext} from '../context/ScheduleContext'
 import { SemestersContext } from '../context/SemestersContext'
 
-export default function ScheduleTable() {
+export default function ScheduleTable({selectedYear}) {
 
-  const {selectedYear} = useContext(SemestersContext)
+  const {handleViewClassroomModal} = useContext(SemestersContext)
 
   return (
     <div className="scheduleTable">
@@ -57,6 +57,7 @@ export default function ScheduleTable() {
                     if(day === 'monday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -75,6 +76,7 @@ export default function ScheduleTable() {
                     if(day === 'tuesday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -93,6 +95,7 @@ export default function ScheduleTable() {
                     if(day === 'wednesday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -111,6 +114,7 @@ export default function ScheduleTable() {
                     if(day === 'thursday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -129,6 +133,7 @@ export default function ScheduleTable() {
                     if(day === 'friday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -147,6 +152,7 @@ export default function ScheduleTable() {
                     if(day === 'saturday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
@@ -165,6 +171,7 @@ export default function ScheduleTable() {
                     if(day === 'sunday') 
                       return (
                         <ScheduleBox
+                          onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
                           startingHour={item.startingHour}
