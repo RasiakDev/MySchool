@@ -5,18 +5,6 @@ import { Container } from 'semantic-ui-react'
 
 export default function ScheduleBox({teacher, lenda, className, startingHour, endingHour, onClick}) {
 
-    const boxStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: 130,
-        border: 1,
-        backgroundColor: 'teal',
-        borderRadius: 2,
-        paddingVertical: 3
-    }
     return (
         <div onClick={onClick} className='scheduleBox'>
             <h3>{lenda}</h3>

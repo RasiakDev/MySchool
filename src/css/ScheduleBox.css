@@ -1,10 +1,16 @@
 .scheduleBox {
   width: 100%;
   text-align: center;
-  background-color: teal;
+  border: 1px solid;
   padding: 15px 0 15px 0;
-  border-radius: 3px;
+  
+  color:rgb(0, 0, 0);
+  border-radius: 5px;
   margin-top: 20px;
+}
+.scheduleBox:hover {
+  background: rgb(212, 212, 212);
+  
 }
 
 .scheduleBox * {

@@ -167,7 +167,7 @@ export const semesters =
         students : [
             {
                 "id": 1,
-                'name': 'Besmir',
+                'name': 'Hafiz',
                 'lastname': 'Guma',
                 'age': 27,
                 'course': 'English',
@@ -177,7 +177,7 @@ export const semesters =
             },
             {
                 "id": 3,
-                'name': 'Gezim',
+                'name': 'Laura',
                 'lastname': 'Hovi',
                 'age': 28,
                 'course': 'Italian',
@@ -188,7 +188,7 @@ export const semesters =
             },       
             {
                 "id": 4,
-                'name': 'Antuen',
+                'name': 'Astrit',
                 'lastname': 'Basha',
                 'age': 18,
                 'course': 'Italian',
@@ -317,7 +317,7 @@ export const semesters =
                 students: [
                     {
                         "id": 1,
-                        'name': 'Besmir',
+                        'name': 'Beqir',
                         'lastname': 'Guma',
                         'age': 27,
                         'course': 'English',
@@ -327,7 +327,7 @@ export const semesters =
                     },
                     {
                         "id": 3,
-                        'name': 'Gezim',
+                        'name': 'Xhoni',
                         'lastname': 'Hovi',
                         'age': 28,
                         'course': 'Italian',
@@ -338,7 +338,84 @@ export const semesters =
                     },       
                     {
                         "id": 4,
-                        'name': 'Antuen',
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 5,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 45,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 55,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 56,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 556,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 563,
+                        'name': 'Livia',
+                        'lastname': 'Basha',
+                        'age': 18,
+                        'course': 'Italian',
+                        'level': 'B2',
+                        'assignedClass': 'A2 Junior',
+                        'debit': 400,
+                        'seasons': ['2022 - 2023']
+                    },
+                    {
+                        "id": 856,
+                        'name': 'Livia',
                         'lastname': 'Basha',
                         'age': 18,
                         'course': 'Italian',

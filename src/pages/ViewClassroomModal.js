@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
-import { Container, Modal } from 'semantic-ui-react'
+import { Container, Modal, Segment } from 'semantic-ui-react'
 import { SemestersContext } from '../context/SemestersContext'
+import SimpleStudentsTable from '../components/SimpleStudentsTable'
 
 export default function ViewClassroomModal() {
     const {
@@ -8,6 +9,14 @@ export default function ViewClassroomModal() {
         handleViewClassroomModal,
         selectedClassroom
     } = useContext(SemestersContext)
+
+    const style = {
+        marginLeft: 6
+    }
+    const flexStyle = {
+        display: 'flex',
+        color: 'white'
+    }
   return (
     <Modal
         open={viewClassroomModal}
@@ -17,11 +26,30 @@ export default function ViewClassroomModal() {
         
     >
         {selectedClassroom && 
-        (<Container style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-            <h3>Course: {selectedClassroom.course}</h3>
-            <h3>Name: {selectedClassroom.name}</h3>
-            <h3>Schedule: {selectedClassroom.startingHour + ' - ' + selectedClassroom.endingHour}</h3>
-            <h3>Teacher: {selectedClassroom.teacher}</h3>
+        (<Container style={{ padding: 40}}>
+            <Segment style={{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: '#4778B3', paddingTop:28}}>
+                <div style={flexStyle}>
+                    <h4>Course:{' '}</h4>
+                    <p style={style}>{selectedClassroom.course}</p>
+                </div>
+                <div style={flexStyle}>
+                    <h4>Name:</h4>
+                    <p style={style}> {'  ' +selectedClassroom.name}</p>
+                </div>
+                <div style={flexStyle}>
+                    <h4 >Schedule:</h4>
+                    <p style={style}>{selectedClassroom.startingHour + ' - ' + selectedClassroom.endingHour}</p>
+                </div>
+                <div style={flexStyle}>
+                    <h4 >Teacher:</h4>
+                    <p style={style}>{selectedClassroom.teacher}</p>
+                </div>
+                <div style={flexStyle}>
+                    <h4 >Students:</h4>
+                    <p style={style}>{selectedClassroom.students.length}</p>
+                </div>
+            </Segment>
+            <SimpleStudentsTable data={selectedClassroom.students}/>
         </Container>)
         }
 
