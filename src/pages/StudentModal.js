@@ -3,10 +3,10 @@ import { Button, Image, Modal, Form, Icon, Message} from 'semantic-ui-react'
 import {StudentContext} from '../context/StudentContext'
 import { monday } from '../data/scheduleData'
 
-function StudentModal() {
+function StudentModal({modalVisible, onSubmit, onCancel, onOpen}) {
   const {
     semesters,
-    modalVisible,
+    
     modalData,
     handleUserModal,
     handleChangeModal,
@@ -64,8 +64,8 @@ function StudentModal() {
 
   return (
     <Modal
-      onClose={() => handleUserModal(false)}
-      onOpen={() => handleUserModal(true)}
+      onClose={onCancel}
+      onOpen={onOpen}
       open={modalVisible}
     >
       <Modal.Header>
@@ -202,7 +202,7 @@ function StudentModal() {
           primary
           size="medium"
         />
-        <Button color='black' onClick={() => handleUserModal(false)}>
+        <Button color='black' onClick={onCancel}>
           Cancel
         </Button>
         <Button
@@ -210,7 +210,7 @@ function StudentModal() {
           type='submit'
           labelPosition='right'
           icon='checkmark'
-          onClick={handleSubmit}
+          onClick={onSubmit}
           positive
         />
       </Modal.Actions>

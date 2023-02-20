@@ -1,9 +1,10 @@
 import React, {useContext} from 'react'
-import { Menu, Icon, Table, Button, Checkbox } from 'semantic-ui-react'
+import { Menu, Icon, Table, Button, Checkbox,Modal} from 'semantic-ui-react'
 import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
+import StudentsTable from './StudentsTable'
 
 export default function SimpleStudentsTable({data}) {
   const {
@@ -14,12 +15,22 @@ export default function SimpleStudentsTable({data}) {
     dispatch,
     handleCheckbox,
     selectCheckBox,
-    setSelectCheckbox
+    addStudentInClassroom,
+    handleAddStudentInClassroomModal,
+    addStudentVisible
 
   } = useContext(StudentContext)
   const { column, direction } = state
 
   return (
+    <>
+      {/* <StudentModal
+        modalVisible={addStudentVisible}
+        onSubmit={() => addStudentInClassroom()}
+        onCancel={() => handleAddStudentInClassroomModal(false)}
+        onOpen={() => handleAddStudentInClassroomModal(true)}
+      /> */}
+      
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
@@ -104,7 +115,7 @@ export default function SimpleStudentsTable({data}) {
             <Table.HeaderCell colSpan={!selectCheckBox ? '9' : '8'}>
                 <Button
                 type='submit'
-                onClick={() => handleUserModal(true)}
+                onClick={() => handleAddStudentInClassroomModal(true)}
                 icon
                 labelPosition='left'
                 floated='right'
@@ -116,5 +127,13 @@ export default function SimpleStudentsTable({data}) {
           </Table.Row>
         </Table.Footer>
       </Table>
+      <Modal
+        onOpen={handleAddStudentInClassroomModal(true)}
+        onClose={handleAddStudentInClassroomModal(false)}
+        open={true}
+      >
+        klsdjlksdkljsdlkf
+      </Modal>
+    </>
   )
 }

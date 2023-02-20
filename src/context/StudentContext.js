@@ -7,6 +7,7 @@ export const StudentContext = createContext()
 export function StudentProvider({children}) {
 
     const [modalVisible, setModalVisible] = useState(null)
+    const [addStudentVisible, setAddStudentVisible] = useState(false)
     const [newEntry, setNewEntry]  = useState(false)
     const [tableData, setTableData] = useState(studentsList)
     const [selectCheckBox, setSelectCheckbox] = useState(false)
@@ -17,16 +18,8 @@ export function StudentProvider({children}) {
     const [succesErrorText, setSuccesErrorText] = useState()
     const [isSuccess, setIsSuccess] = useState(false)
     const [isBusy, setIsBusy] = useState(false)
-    const [modalData, setModalData] = useState({
-        // name: '',
-        // lastname: '',
-        // id: 0,
-        // age: 0,
-        // course: '',
-        // level: '',
-        // assignedClass: '',
-        // debit: 0,
-    })
+    const [modalData, setModalData] = useState({})
+    
 
   
     const [errorState, setErrorState] = useState({
@@ -209,6 +202,14 @@ export function StudentProvider({children}) {
             }            
         })
     }
+
+    const handleAddStudentInClassroomModal = (visible) => {
+        setAddStudentVisible(visible)
+    }
+    //Add student in selected classRoom
+    const addStudentInClassroom = () => {
+        console.log('add student')
+    }
     //Handle StudentModal submit
     const handleSubmit = () => {
         console.log(name, lastname, age)
@@ -351,6 +352,9 @@ export function StudentProvider({children}) {
                 succesErrorText,
                 isSuccess,
                 newEntry,
+                addStudentVisible,
+                handleAddStudentInClassroomModal,
+                addStudentInClassroom,
                 handleIntInputs,
                 setSuccesErrorText,
                 setErrorState,

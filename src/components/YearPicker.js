@@ -29,7 +29,7 @@ export default function YearPicker({pickedYear}) {
     return (
         <Dropdown
             button
-            placeholder='Academic Year'
+            placeholder='Seasons'
             onChange={handleChange}
             options={options}
             value={dropDownValue}

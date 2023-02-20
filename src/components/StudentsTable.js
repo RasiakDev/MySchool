@@ -7,12 +7,14 @@ import { StudentContext } from '../context/StudentContext'
 
 export default function StudentsTable() {
   const {
+    modalVisible,
     handleUserModal,
     updateTableData,
     tableData,
     state,
     dispatch,
     handleCheckbox,
+    handleSubmit,
     selectCheckBox,
     setSelectCheckbox
 
@@ -31,7 +33,12 @@ export default function StudentsTable() {
           label={!selectCheckBox ? "Enter in Edit Mode" : 'Exit from Edit Mode'}
           
       />
-      <StudentModal />
+      <StudentModal
+        modalVisible={modalVisible}
+        onCancel={() => handleUserModal(false)}
+        onOpen={() =>handleUserModal(true)}
+        onSubmit={handleSubmit}
+      />
       <Table selectable sortable celled>
         {/* -----------------TABLE HEADER------------------------ */}
         <Table.Header>
