@@ -15,15 +15,17 @@ export function SemestersProvider({children}) {
     //toggle for ViewClassroomModal.js
     const [viewClassroomModal, setViewClassroomModal] = useState(false)
     const [selectedClassroom, setSelectedClassroom] = useState()
-    const [currentSeason, setCurrentSeason] = useState(semesters[0].classRooms)
+    const [currentSeason, setCurrentSeason] = useState(semesters[0])
+    const [addStudentVisible, setAddStudentVisible] = useState(false)
     useEffect(()=> {
         semesters.forEach((item) => {
             if(item.currentSeason == true){
-                setCurrentSeason(item.classRooms)
+                setCurrentSeason(item)
+                
             }
         })
     }, [currentSeason])
-    const [selectedYear, setSelectedYear] = useState(semesters[0].classRooms)
+    const [selectedYear, setSelectedYear] = useState(semesters[0])
     const [isCurrentSeason, setIsCurrentSeason] = useState(true)
     const [errorState, setErrorState] = useState({})
     const [inputValue, setInputValue] = useState({
@@ -31,7 +33,8 @@ export function SemestersProvider({children}) {
         students: [],
         classrooms: [],
     })
-    const {year, students, classrooms} = inputValue
+
+    const [addClassroomModalVisible, setAddClassroomModalVisible] = useState(false)
     //toggle for AddSemesterModal.js
     const handleAddSemesterModal = (value) => {
         setAddSemesterModal(value)
@@ -44,11 +47,18 @@ export function SemestersProvider({children}) {
             setSelectedYear(selectedYear)
         setViewSemesterModal(value)
     }
+    //toggle for ViewClassroomModal.js
     const handleViewClassroomModal = (value, selectedClassroom) => {
         if(value)
             setSelectedClassroom(selectedClassroom)
         setViewClassroomModal(value)
-        console.log(selectedClassroom)
+    }
+    //toggle for SimpleStudentsTable.js modal for add student
+    const handleAddStudentInClassroomModal = (visible) => {       
+        setAddStudentVisible(visible)
+    }
+    const handleAddClassroomModal = (visible) => {
+        setAddClassroomModalVisible(visible)
     }
 
     const validation = (e) => {
@@ -77,7 +87,25 @@ export function SemestersProvider({children}) {
         })
         inputValue.students = checkedArray
     }
+    
 
+    //Add student in selected classRoom
+    const addStudentInClassroom = () => {
+       semesters.map(item =>{
+            if(item.id == selectedYear.id){
+                item.classRooms.map(classRoom => {
+                    if(classRoom.id == selectedClassroom.id){
+                        classRoom.students.push(...checkedArray)
+                        setAddStudentVisible(false)
+                        console.log(classRoom.students)
+                        
+                        
+                    }
+                })
+            }
+       })
+    }
+    
     //submit new season
     const addNewSeason = () => {
         if(inputValue.year === undefined || inputValue.year === null){
@@ -104,6 +132,12 @@ export function SemestersProvider({children}) {
                 selectedClassroom,
                 isCurrentSeason,
                 currentSeason,
+                addStudentVisible,
+                addClassroomModalVisible,
+                semesters,
+                handleAddClassroomModal,
+                addStudentInClassroom,
+                handleAddStudentInClassroomModal,
                 setIsCurrentSeason,
                 handleViewClassroomModal,
                 handleViewSemesterModal,

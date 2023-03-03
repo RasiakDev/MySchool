@@ -141,7 +141,7 @@ export default function StudentsTable() {
                 floated='right'
                 primary>
                   <Icon name='user'/>
-                  Add Student
+                  Add New Student
                 </Button>
             </Table.HeaderCell>
           </Table.Row>

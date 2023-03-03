@@ -1,16 +1,19 @@
 import React, {useContext} from 'react'
-import { Grid, Header, Segment, Table } from 'semantic-ui-react'
+import { Button, Grid, Header, Segment, Table } from 'semantic-ui-react'
 import ScheduleBox from './ScheduleBox'
 import {ScheduleContext} from '../context/ScheduleContext'
 import { SemestersContext } from '../context/SemestersContext'
+import AddClassroomModal from '../pages/AddClassroomModal'
 
 export default function ScheduleTable({selectedYear}) {
 
-  const {handleViewClassroomModal} = useContext(SemestersContext)
+  const {handleViewClassroomModal, handleAddClassroomModal, addClassroomModalVisible} = useContext(SemestersContext)
 
   return (
     <div className="scheduleTable">
-      <Grid  doubling columns={7}>
+      <AddClassroomModal visible={addClassroomModalVisible}/>
+      <Button onClick={() => handleAddClassroomModal(true)} primary >Add Classroom</Button>
+      <Grid style={{marginTop: 20}}  doubling columns={7}>
         <Grid.Row as={Table} divided textAlign='center'>      
             <Grid.Column>
               <Header>
@@ -51,7 +54,7 @@ export default function ScheduleTable({selectedYear}) {
           <Grid.Row divided>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'monday') 
@@ -70,7 +73,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'tuesday') 
@@ -89,7 +92,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'wednesday') 
@@ -108,7 +111,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'thursday') 
@@ -127,7 +130,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'friday') 
@@ -146,7 +149,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'saturday') 
@@ -165,7 +168,7 @@ export default function ScheduleTable({selectedYear}) {
             </Grid.Column>
             <Grid.Column>
               {
-                selectedYear.map((item) => {
+                selectedYear.classRooms.map((item) => {
                   return(
                   item.weekDays.map((day)=> {
                     if(day === 'sunday') 

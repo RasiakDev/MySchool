@@ -73,13 +73,14 @@ export const studentsList = [
 
 export const semesters = 
 [
-    {
+    {   id: 1,
         currentSeason: true,
         year : '2022 - 2023',
         classRooms: [
             {
                 id: 1,
                 course: 'English',
+                level: 'A1',
                 weekDays: ['tuesday', 'friday'],
                 startingHour: '16',
                 endingHour: '18',
@@ -123,6 +124,7 @@ export const semesters =
             {
                 id: 2,
                 course: 'English',
+                level: 'A2',
                 weekDays: ['monday', 'wednesday'],
                 startingHour: 13,
                 endingHour: 15,
@@ -200,6 +202,7 @@ export const semesters =
         ]
     },
     {
+        id: 2,
         currentSeason: false,
         year : 'Summer 2022',
         studentCount: 2,
@@ -208,6 +211,7 @@ export const semesters =
             {
                 id: 2,
                 course: 'English',
+                level: 'B1',
                 weekDays: ['monday', 'wednesday'],
                 startingHour: 13,
                 endingHour: 15,
@@ -302,13 +306,15 @@ export const semesters =
             }, 
         ]
     },
-    {   currentSeason: false,
+    {   id: 3,
+        currentSeason: false,
         year : '2021 - 2022',
         studentCount: 2,
         classRooms: [
             {
                 id: 1,
                 course: 'English',
+                level: 'A2',
                 weekDays: ['tuesday', 'friday'],
                 startingHour: '16',
                 endingHour: '18',
@@ -429,6 +435,7 @@ export const semesters =
             {
                 id: 14,
                 course: 'English',
+                level: 'B2',
                 weekDays: ['tuesday', 'friday'],
                 startingHour: '16',
                 endingHour: '18',
@@ -472,6 +479,7 @@ export const semesters =
             {
                 id: 2,
                 course: 'English',
+                level: 'B1',
                 weekDays: ['monday', 'wednesday'],
                 startingHour: 13,
                 endingHour: 15,

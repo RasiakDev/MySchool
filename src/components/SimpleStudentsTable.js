@@ -4,6 +4,7 @@ import '../css/Students.css'
 import YearPicker from './YearPicker'
 import StudentModal from '../pages/StudentModal'
 import { StudentContext } from '../context/StudentContext'
+import { SemestersContext } from '../context/SemestersContext'
 import StudentsTable from './StudentsTable'
 
 export default function SimpleStudentsTable({data}) {
@@ -15,12 +16,16 @@ export default function SimpleStudentsTable({data}) {
     dispatch,
     handleCheckbox,
     selectCheckBox,
-    addStudentInClassroom,
-    handleAddStudentInClassroomModal,
-    addStudentVisible
+    
 
   } = useContext(StudentContext)
   const { column, direction } = state
+
+  const {
+    handleAddStudentInClassroomModal,
+    addStudentVisible,
+    addStudentInClassroom,
+  } = useContext(SemestersContext)
 
   return (
     <>
@@ -128,11 +133,19 @@ export default function SimpleStudentsTable({data}) {
         </Table.Footer>
       </Table>
       <Modal
-        onOpen={handleAddStudentInClassroomModal(true)}
-        onClose={handleAddStudentInClassroomModal(false)}
-        open={true}
+        onOpen={() => handleAddStudentInClassroomModal(true)}
+        onClose={() => handleAddStudentInClassroomModal(false)}
+        open={addStudentVisible}
+        style={{padding: 20}}
       >
-        klsdjlksdkljsdlkf
+        <StudentsTable/>
+          <Button 
+            positive
+            floated='right'
+            onClick={addStudentInClassroom}
+          >
+            Save
+          </Button>
       </Modal>
     </>
   )

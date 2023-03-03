@@ -3,13 +3,14 @@
   text-align: center;
   border: 1px solid;
   padding: 15px 0 15px 0;
-  
+  cursor: pointer;
   color:rgb(0, 0, 0);
   border-radius: 5px;
   margin-top: 20px;
 }
 .scheduleBox:hover {
   background: rgb(212, 212, 212);
+  cursor: pointer;
   
 }
 

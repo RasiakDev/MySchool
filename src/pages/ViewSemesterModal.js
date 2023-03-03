@@ -23,7 +23,7 @@ export default function ViewSemesterModal() {
         <Button primary style={{position: 'absolute', right: 20}}>View Students</Button>
       </Modal.Header>
       <Modal.Content scrolling style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>          
-        <ScheduleTable selectedYear={selectedYear.classRooms}/>
+        <ScheduleTable selectedYear={selectedYear}/>
       </Modal.Content>
     </Modal>
     <ViewClassroomModal/>
