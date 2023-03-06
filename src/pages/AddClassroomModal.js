@@ -1,10 +1,13 @@
-import React, {useContext} from 'react'
-import { Form, Modal } from 'semantic-ui-react'
+import React, {useContext, useState} from 'react'
+import { Form, Modal, Button, Icon } from 'semantic-ui-react'
 import { SemestersContext } from '../context/SemestersContext'
+import StudentModal from './StudentModal'
 
 
 export default function AddClassroomModal({visible}) {
     const {handleAddClassroomModal, semesters} = useContext(SemestersContext)
+
+    const [secondModal, setSecondModal] = useState(false)
 
     const courses = [
         {key: 'en', text: 'English', value: 'English'},
@@ -42,6 +45,7 @@ export default function AddClassroomModal({visible}) {
         }
       })
   return (
+    <>
     <Modal
         open={visible}
         onClose={() => handleAddClassroomModal(false)}
@@ -76,21 +80,64 @@ export default function AddClassroomModal({visible}) {
               options={weekDays}
             />
             <Form.Group
-              style={{display: 'flex'}}
-            >
-              <Form.Input
-                fluid
-                placeholder="00"
-                required={true}
-                type='number'
-              />
-              :
-              <Form.Input
-                type='number'
-              />
+              style={{ width: '100%', display: 'flex', flexDirection: 'horisontal'}}
+            > 
+            <div style={{width: '30%',  marginLeft: -47}}>
+              <div style={{display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
+                <h5>Starting hour</h5>
+              </div>
+              <div style={{display: 'flex', width: '100%', justifyContent:'center'}}>
+                <Form.Input
+                  placeholder="00"
+                  required={true}
+                  type='number'
+                  width={5}
+                />
+                <div style={{display:'flex', alignItems: 'center'}}>:</div>
+                <Form.Input
+                  type='number'
+                  placeholder='00'
+                  width={5}
+                />
+              </div>
+            </div>
+            
+            <div style={{width: '30%',  marginLeft: -80}}>
+              <div style={{display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
+                <h5>Ending Hour</h5>
+              </div>
+              <div style={{display: 'flex', width: '100%', justifyContent:'center'}}>
+                <div style={{display:'flex', alignItems: 'center', marginRight: 8}}> - </div>
+                <Form.Input
+                  placeholder="00"
+                  required={true}
+                  type='number'
+                  width={5}
+                />
+                <div style={{display:'flex', alignItems: 'center'}}>:</div>
+                <Form.Input
+                  type='number'
+                  placeholder='00'
+                  width={5}
+                />
+              </div>
+            </div>
             </Form.Group>
             <Form.Input placeholder="Classroom Name"/>
         </Form>
+        <Button
+         icon 
+         primary 
+         labelPosition='right'
+         style={{marginTop: 30}}
+         floated='right'
+         onClick={() => setSecondModal(true)}
+        >
+          Select Students
+          <Icon name='right arrow'/>
+        </Button>
     </Modal>
+    <StudentModal modalVisible={secondModal}/>
+    </>
   )
 }

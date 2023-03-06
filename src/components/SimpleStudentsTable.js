@@ -97,8 +97,8 @@ export default function SimpleStudentsTable({data}) {
         </Table.Header>
         {/* -----------------TABLE BODY------------------------ */}
         <Table.Body>
-          {data.map((item) => (
-          <Table.Row key={item.id} onClick={() => {selectCheckBox && handleUserModal(true, item)}}>
+          {data.map((item, index) => (
+          <Table.Row key={index} onClick={() => {selectCheckBox && handleUserModal(true, item)}}>
               {!selectCheckBox &&
               <Table.Cell className='checkbox' collapsing>
                 <Checkbox onChange={(event, data) => handleCheckbox(event, data, item)}/>

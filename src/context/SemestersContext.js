@@ -53,10 +53,12 @@ export function SemestersProvider({children}) {
             setSelectedClassroom(selectedClassroom)
         setViewClassroomModal(value)
     }
-    //toggle for SimpleStudentsTable.js modal for add student
+    //toggle for SimpleStudentsTable.js modal for add student in classroom
     const handleAddStudentInClassroomModal = (visible) => {       
         setAddStudentVisible(visible)
+        setCheckedArray([])
     }
+    //toggle for AddClassroomModal.js
     const handleAddClassroomModal = (visible) => {
         setAddClassroomModalVisible(visible)
     }
@@ -96,14 +98,32 @@ export function SemestersProvider({children}) {
                 item.classRooms.map(classRoom => {
                     if(classRoom.id == selectedClassroom.id){
                         classRoom.students.push(...checkedArray)
-                        setAddStudentVisible(false)
-                        console.log(classRoom.students)
+                        setAddStudentVisible(false)                        
+                        checkedArray.map(selectedStudent => {
+                            studentsList.map(student =>{
+                                if(student.id === selectedStudent.id){
+                                    student.level = selectedClassroom.level
+                                    student.assignedClass = selectedClassroom.name
+                                }
+                            })
+                            semesters.map((year) => {
+                                year.students.map(student => {
+                                    if(student.id === selectedStudent.id){
+                                        student.level = selectedClassroom.level
+                                        student.assignedClass = selectedClassroom.name
+                                    }
+                                })
+                            })
+                            
+                        })
                         
                         
                     }
                 })
             }
        })
+       
+       setCheckedArray([])
     }
     
     //submit new season
