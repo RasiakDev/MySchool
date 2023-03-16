@@ -54,14 +54,14 @@ export function SemestersProvider({children}) {
         setViewClassroomModal(value)
     }
     //toggle for SimpleStudentsTable.js modal for add student in classroom
-    const handleAddStudentInClassroomModal = (visible) => {       
-        setAddStudentVisible(visible)
-        setCheckedArray([])
-    }
+    // const handleAddStudentInClassroomModal = (visible) => {       
+    //     setAddStudentVisible(visible)
+    //     setCheckedArray([])
+    // }
     //toggle for AddClassroomModal.js
-    const handleAddClassroomModal = (visible) => {
-        setAddClassroomModalVisible(visible)
-    }
+    // const handleAddClassroomModal = (visible) => {
+    //     setAddClassroomModalVisible(visible)
+    // }
 
     const validation = (e) => {
         const {name, value} = e.target
@@ -153,11 +153,11 @@ export function SemestersProvider({children}) {
                 isCurrentSeason,
                 currentSeason,
                 addStudentVisible,
-                addClassroomModalVisible,
+                // addClassroomModalVisible,
                 semesters,
-                handleAddClassroomModal,
+                // handleAddClassroomModal,
                 addStudentInClassroom,
-                handleAddStudentInClassroomModal,
+                // handleAddStudentInClassroomModal,
                 setIsCurrentSeason,
                 handleViewClassroomModal,
                 handleViewSemesterModal,

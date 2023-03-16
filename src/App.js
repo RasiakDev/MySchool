@@ -7,6 +7,7 @@ import SideMenu from "./pages/SideMenu";
 import { StudentProvider } from "./context/StudentContext";
 import { ScheduleProvider } from "./context/ScheduleContext";
 import { SemestersProvider } from "./context/SemestersContext";
+import {ClassroomProvider} from "./context/ClassroomContext";
 import Semesters from "./pages/Semesters";
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
     <StudentProvider>
     <ScheduleProvider>
     <SemestersProvider>
+    <ClassroomProvider>
       <BrowserRouter>
         <SideMenu>
           <Routes>
@@ -26,6 +28,7 @@ function App() {
           </Routes>
         </SideMenu>
       </BrowserRouter>
+    </ClassroomProvider>
     </SemestersProvider>
     </ScheduleProvider>
     </StudentProvider>

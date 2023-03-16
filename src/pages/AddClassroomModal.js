@@ -1,13 +1,15 @@
 import React, {useContext, useState} from 'react'
 import { Form, Modal, Button, Icon } from 'semantic-ui-react'
+import StudentsTable from '../components/StudentsTable'
+import { ClassroomContext } from '../context/ClassroomContext'
 import { SemestersContext } from '../context/SemestersContext'
 import StudentModal from './StudentModal'
 
 
 export default function AddClassroomModal({visible}) {
-    const {handleAddClassroomModal, semesters} = useContext(SemestersContext)
+    const { semesters} = useContext(SemestersContext)
 
-    const [secondModal, setSecondModal] = useState(false)
+    const {classroomData, handleAddClassroomModal, handleClassromInputs, handleChangeSelector, setAddStudentsModal, addStudentsModal, handleSubmit} = useContext(ClassroomContext)
 
     const courses = [
         {key: 'en', text: 'English', value: 'English'},
@@ -17,8 +19,8 @@ export default function AddClassroomModal({visible}) {
 
       const teachers = [
         {key: 1, text: 'Indrit', value: 'indrit'},
-        {key: 1, text: 'Elton', value: 'elton'},
-        {key: 1, text: 'Brisejda', value: 'Brisejda'}
+        {key: 2, text: 'Elton', value: 'elton'},
+        {key: 3, text: 'Brisejda', value: 'Brisejda'}
       ]
 
       const levels = [
@@ -56,28 +58,44 @@ export default function AddClassroomModal({visible}) {
             <Form.Select
               placeholder='Course'
               label="Course"
+              name='course'
               options={courses}
+              value={classroomData.course}
+              onChange={(e, data) => handleChangeSelector(e, data)}
             />
             <Form.Select
               placeholder='Level'
               label="Level"
+              name='level'
               options={levels}
+              onChange={(e, data) => handleChangeSelector(e, data)}
+              value={classroomData.level}
+
             />
             <Form.Select
               placeholder='Season'
               label="Season"
+              name='year'
               options={seasons}
+              onChange={(e, data) => handleChangeSelector(e, data)}
+              value={classroomData.year}
             />
             <Form.Select
               placeholder='Teacher'
               label="Teacher"
+              name='teacher'
               options={teachers}
+              onChange={(e, data) => handleChangeSelector(e, data)}
+              value={classroomData.teacher}
             />
             <Form.Select
               multiple
               placeholder='Days'
               label="Select daily Schedule"
+              name='weekDays'
               options={weekDays}
+              onChange={(e, data) => handleChangeSelector(e, data)}
+              value={classroomData.weekDays}
             />
             <Form.Group
               style={{ width: '100%', display: 'flex', flexDirection: 'horisontal'}}
@@ -91,13 +109,18 @@ export default function AddClassroomModal({visible}) {
                   placeholder="00"
                   required={true}
                   type='number'
+                  name='startHours'
                   width={5}
+                  onChange={handleClassromInputs}
+                  
                 />
                 <div style={{display:'flex', alignItems: 'center'}}>:</div>
                 <Form.Input
                   type='number'
+                  name='startMinutes'
                   placeholder='00'
                   width={5}
+                  onChange={handleClassromInputs}
                 />
               </div>
             </div>
@@ -112,18 +135,27 @@ export default function AddClassroomModal({visible}) {
                   placeholder="00"
                   required={true}
                   type='number'
+                  name='endHours'
                   width={5}
+                  onChange={handleClassromInputs}
                 />
                 <div style={{display:'flex', alignItems: 'center'}}>:</div>
                 <Form.Input
                   type='number'
+                  name='endMinutes'
                   placeholder='00'
                   width={5}
+                  onChange={handleClassromInputs}
                 />
               </div>
             </div>
             </Form.Group>
-            <Form.Input placeholder="Classroom Name"/>
+            <Form.Input
+              name='name'
+              placeholder="Classroom Name"
+              onChange={handleClassromInputs}
+              value={classroomData.name}
+            />
         </Form>
         <Button
          icon 
@@ -131,13 +163,21 @@ export default function AddClassroomModal({visible}) {
          labelPosition='right'
          style={{marginTop: 30}}
          floated='right'
-         onClick={() => setSecondModal(true)}
+         onClick={() => setAddStudentsModal(true)}
         >
           Select Students
           <Icon name='right arrow'/>
         </Button>
     </Modal>
-    <StudentModal modalVisible={secondModal}/>
+    <Modal 
+      open={addStudentsModal}
+      onOpen={() => setAddStudentsModal(true)}
+      onClose={() => setAddStudentsModal(false)}
+    >
+      <StudentsTable/>
+      <Button onClick={() => setAddStudentsModal(false)} floated='right'>Cancel</Button>
+      <Button onClick={handleSubmit} floated='right'>Save</Button>
+    </Modal>
     </>
   )
 }

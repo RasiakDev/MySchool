@@ -4,14 +4,15 @@ import ScheduleBox from './ScheduleBox'
 import {ScheduleContext} from '../context/ScheduleContext'
 import { SemestersContext } from '../context/SemestersContext'
 import AddClassroomModal from '../pages/AddClassroomModal'
+import { ClassroomContext } from '../context/ClassroomContext'
 
 export default function ScheduleTable({selectedYear}) {
 
-  const {handleViewClassroomModal, handleAddClassroomModal, addClassroomModalVisible} = useContext(SemestersContext)
-
+  const {handleViewClassroomModal} = useContext(SemestersContext)
+  const {addClassroomModal, handleAddClassroomModal} = useContext(ClassroomContext)
   return (
     <div className="scheduleTable">
-      <AddClassroomModal visible={addClassroomModalVisible}/>
+      <AddClassroomModal visible={addClassroomModal}/>
       <Button onClick={() => handleAddClassroomModal(true)} primary >Add Classroom</Button>
       <Grid style={{marginTop: 20}}  doubling columns={7}>
         <Grid.Row as={Table} divided textAlign='center'>      
