@@ -12,7 +12,7 @@ export default function ScheduleTable({selectedYear}) {
   const {addClassroomModal, handleAddClassroomModal} = useContext(ClassroomContext)
   return (
     <div className="scheduleTable">
-      <AddClassroomModal visible={addClassroomModal}/>
+      <AddClassroomModal visible={addClassroomModal} onOpen={()=> handleAddClassroomModal(true)} onClose={() =>handleAddClassroomModal(false)}/>
       <Button onClick={() => handleAddClassroomModal(true)} primary >Add Classroom</Button>
       <Grid style={{marginTop: 20}}  doubling columns={7}>
         <Grid.Row as={Table} divided textAlign='center'>      
@@ -64,8 +64,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -83,8 +85,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -102,8 +106,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -121,8 +127,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -140,8 +148,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -159,8 +169,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})
@@ -178,8 +190,10 @@ export default function ScheduleTable({selectedYear}) {
                           onClick={() => handleViewClassroomModal('true', item)}
                           lenda={item.course}
                           className={item.name}
-                          startingHour={item.startingHour}
-                          endingHour={item.endingHour}
+                          startHour={item.startHours}
+                          startMinutes={item.startMinutes}
+                          endHour={item.endHours}
+                          endMinutes={item.endMinutes}
                           teacher={item.teacher}
                         />
                   )})

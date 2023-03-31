@@ -104,6 +104,7 @@ export function SemestersProvider({children}) {
                                 if(student.id === selectedStudent.id){
                                     student.level = selectedClassroom.level
                                     student.assignedClass = selectedClassroom.name
+                                    student.course = selectedClassroom.course
                                 }
                             })
                             semesters.map((year) => {
@@ -111,6 +112,7 @@ export function SemestersProvider({children}) {
                                     if(student.id === selectedStudent.id){
                                         student.level = selectedClassroom.level
                                         student.assignedClass = selectedClassroom.name
+                                        student.course = selectedClassroom.course
                                     }
                                 })
                             })

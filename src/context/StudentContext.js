@@ -16,11 +16,8 @@ export function StudentProvider({children}) {
     const [dropDownValue, setDropdownValue] = useState('')
     const [issubmit, setIsSubmit] = useState(false)
     const [succesErrorText, setSuccesErrorText] = useState()
-    const [isSuccess, setIsSuccess] = useState(false)
-    const [isBusy, setIsBusy] = useState(false)
-    const [modalData, setModalData] = useState({})
-    
-
+    const [isSuccess, setIsSuccess] = useState(false)  
+    const [modalData, setModalData] = useState({})    
   
     const [errorState, setErrorState] = useState({
         name: false,
@@ -32,7 +29,6 @@ export function StudentProvider({children}) {
         studentsList.forEach((item) => {
             if(val == item.id)
                 handleError(name, "Id is busy")
-                setIsBusy(true)
         })
     }
 
@@ -89,9 +85,11 @@ export function StudentProvider({children}) {
             case 'level':
                 if(!value)
                     handleError(name, "Level is Required")
+                break
             case 'debit':
                 if(!value || isNaN(value))
                     handleError(name, "Insert Ammount")
+                break
             default:
                 break;
         }
@@ -103,15 +101,14 @@ export function StudentProvider({children}) {
     }
 
     const handleCheckbox = (evt, data, item) => {
-        const found = checkedArray.some((element)=> {
-            return item.id == element.id
-        })
-        if(data.checked){
-            if(!found){
-                checkedArray.push(item)
-            }else{
-                console.log('found')
-            }
+        //returns true or false if item exist 
+        // const found = checkedArray.some((element)=> {
+        //     return item.id == element.id
+        // })
+        if(data.checked){            
+                checkedArray.push(item)            
+        }else{
+            setCheckedArray(current => current.filter((student => student.id != item.id)))
         }
     }
 

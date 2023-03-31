@@ -1,12 +1,13 @@
 import React, {createContext, useContext, useState, useEffect} from 'react'
 import { StudentContext } from './StudentContext'
-import { semesters } from '../data/studentData'
+import { semesters, studentsList } from '../data/studentData'
 
 export const ClassroomContext = createContext()
 export function ClassroomProvider({children}) {
 
     const [addClassroomModal, setAddClassroomModal] = useState(false)
     const [addStudentsModal, setAddStudentsModal] = useState(false)
+    const [editClassroomModal, setEditClassroomModal] = useState(false)
     const {checkedArray, setCheckedArray} = useContext(StudentContext)
     const [selectedYear, setSelectedYear] = useState()
     const [errorState, setErrorState] = useState({
@@ -128,6 +129,10 @@ export function ClassroomProvider({children}) {
         setClassroomData({})
         setErrorState({})
     }
+    const handleEditClassroom = (value) => {
+        setEditClassroomModal(value)
+
+    }
     const openSecondModal = (value) => {
         if(
             course === false &&
@@ -194,14 +199,29 @@ export function ClassroomProvider({children}) {
             }            
         })       
     }
-
+    const submitEditData = () => {
+        console.log(classroomData)
+    }
     const handleSubmit = () => {
-        //to do -- to check if student already exist
-        if(checkedArray.length >= 1){
-            checkedArray.map(student => {
-                console.log(student)
+        checkedArray.map(selectedStudent => {
+            studentsList.map(student =>{
+                if(student.id === selectedStudent.id){
+                    student.level = classroomData.level
+                    student.assignedClass = classroomData.name
+                    student.course = classroomData.course
+                }
             })
-        }
+            semesters.map((year) => {
+                year.students.map(student => {
+                    if(student.id === selectedStudent.id){
+                        student.level = classroomData.level
+                        student.assignedClass = classroomData.name
+                        student.course = classroomData.course
+                    }
+                })
+            })
+            
+        })
         classroomData.students = checkedArray
         semesters.map((semester) => {
             if(semester.year == selectedYear){
@@ -222,6 +242,9 @@ export function ClassroomProvider({children}) {
             classroomData,
             addStudentsModal,
             errorState,
+            editClassroomModal,
+            submitEditData,
+            handleEditClassroom,
             openSecondModal,
             formValidation,
             handleSubmit,

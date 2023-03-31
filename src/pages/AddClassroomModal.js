@@ -6,11 +6,12 @@ import { SemestersContext } from '../context/SemestersContext'
 import StudentModal from './StudentModal'
 
 
-export default function AddClassroomModal({visible}) {
+export default function AddClassroomModal({visible, onOpen, onClose, editData}) {
     const { semesters} = useContext(SemestersContext)
 
     const {
       classroomData,
+      submitEditData,
       handleAddClassroomModal,
       handleClassromInputs,
       handleChangeSelector,
@@ -74,8 +75,8 @@ export default function AddClassroomModal({visible}) {
     <>
     <Modal
         open={visible}
-        onClose={() => handleAddClassroomModal(false)}
-        onOpen={() => handleAddClassroomModal(true)}
+        onOpen={onOpen}
+        onClose={onClose}
         style={{padding: 20}}
     >
         <Form>
@@ -84,7 +85,7 @@ export default function AddClassroomModal({visible}) {
               label="Course"
               name='course'
               options={courses}
-              value={classroomData.course}
+              value={editData ? editData.course : classroomData.course}
               onChange={(e, data) => handleChangeSelector(e, data)}
               error={course}
               onBlur={formValidation}
@@ -95,28 +96,28 @@ export default function AddClassroomModal({visible}) {
               name='level'
               options={levels}
               onChange={(e, data) => handleChangeSelector(e, data)}
-              value={classroomData.level}
+              value={editData ? editData.level :classroomData.level}
               error={level}
               onBlur={formValidation}
 
             />
-            <Form.Select
+            { !editData && (<Form.Select
               placeholder='Season'
               label="Season"
               name='year'
               options={seasons}
               onChange={(e, data) => handleChangeSelector(e, data)}
-              value={classroomData.year}
+              value={editData ? editData.season :classroomData.year}
               error={year}
               onBlur={formValidation}
-            />
+            />)}
             <Form.Select
               placeholder='Teacher'
               label="Teacher"
               name='teacher'
               options={teachers}
               onChange={(e, data) => handleChangeSelector(e, data)}
-              value={classroomData.teacher}
+              value={editData ? editData.teacher : classroomData.teacher}
               error={teacher}
               onBlur={formValidation}
             />
@@ -127,7 +128,7 @@ export default function AddClassroomModal({visible}) {
               name='weekDays'
               options={daySelection}
               onChange={(e, data) => handleChangeSelector(e, data)}
-              value={classroomData.weekDays}
+              value={editData ? editData.weekDays : classroomData.weekDays}
               error={weekDays}
               onBlur={formValidation}
             />
@@ -144,6 +145,7 @@ export default function AddClassroomModal({visible}) {
                   required={true}
                   type='number'
                   name='startHours'
+                  defaultValue={editData && editData.startHours}
                   width={5}
                   onChange={handleClassromInputs}
                   error={startHours}
@@ -157,6 +159,7 @@ export default function AddClassroomModal({visible}) {
                   placeholder='00'
                   width={5}
                   onChange={handleClassromInputs}
+                  defaultValue={editData && editData.startMinutes}
                   error={startMinutes}
                   onBlur={formValidation}
                 />
@@ -175,6 +178,7 @@ export default function AddClassroomModal({visible}) {
                   type='number'
                   name='endHours'
                   width={5}
+                  defaultValue={editData && editData.endHours}
                   onChange={handleClassromInputs}
                   error={endHours}
                   onBlur={formValidation}
@@ -186,6 +190,7 @@ export default function AddClassroomModal({visible}) {
                   placeholder='00'
                   width={5}
                   onChange={handleClassromInputs}
+                  defaultValue={editData && editData.endMinutes}
                   error={endMinutes}
                   onBlur={formValidation}
                 />
@@ -196,22 +201,37 @@ export default function AddClassroomModal({visible}) {
               name='name'
               placeholder="Classroom Name"
               onChange={handleClassromInputs}
+              defaultValue={editData && editData.name}
               value={classroomData.name}
               error={name}
               onBlur={formValidation}
             />
         </Form>
-        <Button
-         icon 
-         primary 
-         labelPosition='right'
-         style={{marginTop: 30}}
-         floated='right'
-         onClick={() => openSecondModal(true)}
-        >
-          Select Students
-          <Icon name='right arrow'/>
-        </Button>
+        {editData ? 
+          (<Button 
+            icon 
+            primary 
+            labelPosition='right'
+            style={{marginTop: 30}}
+            floated='right'
+            onClick={() => submitEditData()}
+          >
+            Save
+            <Icon name='save outline'/>
+          </Button>)
+          :
+          (<Button
+          icon 
+          primary 
+          labelPosition='right'
+          style={{marginTop: 30}}
+          floated='right'
+          onClick={() => openSecondModal(true)}
+          >
+            Select Students
+            <Icon name='right arrow'/>
+          </Button>)
+        }
     </Modal>
     <Modal 
       open={addStudentsModal}
